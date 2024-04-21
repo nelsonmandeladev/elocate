@@ -2,5 +2,6 @@
     "login_btn": "Connexion",
     "register_btn": "S'inscrire",
     "key_fr": "French",
-    "key_en": "English"
+    "key_en": "English",
+    "add_location_btn": "Ajouter une place"
 }

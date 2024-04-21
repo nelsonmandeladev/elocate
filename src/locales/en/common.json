@@ -2,5 +2,6 @@
     "login_btn": "Login",
     "register_btn": "Register",
     "key_fr": "Français",
-    "key_en": "Anglais"
+    "key_en": "Anglais",
+    "add_location_btn": "Add a location"
 }

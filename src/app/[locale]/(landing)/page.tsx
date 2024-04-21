@@ -1,4 +1,4 @@
-import { Button } from '@/components'
+import { MapSection } from '@/components'
 import initTranslations from '@/lib/i18n'
 import React from 'react'
 
@@ -11,11 +11,9 @@ export default async function page({ params: { locale } }: PageProps) {
     const { t } = await initTranslations(locale, ['home', 'common'])
     return (
         <main
-            className='h-dvh flex justify-center items-center'
+            className='h-[calc(100dvh-100px)] flex justify-center items-center'
         >
-            <Button >
-                {t("hello_world")}
-            </Button>
+            <MapSection />
         </main>
     )
 }
