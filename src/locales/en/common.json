@@ -1,7 +1,20 @@
 {
     "login_btn": "Login",
+    "key_sign_up": "Sign up",
     "register_btn": "Register",
     "key_fr": "Français",
     "key_en": "Anglais",
-    "add_location_btn": "Add a location"
+    "add_location_btn": "Add a location",
+    "login_title": "Login",
+    "login_sub_title": "Enter your email below to login to your account or use Google or Facebook to continues",
+    "login_required": "Login required",
+    "key_email": "Email",
+    "key_password": "Password",
+    "forgot_password": "Forgot your password?",
+    "login_with_google": "Login with Google",
+    "login_with_facebook": "Login with Facebook",
+    "no_account_text": "Don't have an account?",
+    "login_required_add_location": "You must be logged in to start adding new location",
+    "key_warning": "Warning",
+    "enter_password_placeholder": "Enter your password"
 }

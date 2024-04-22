@@ -43,7 +43,7 @@ export function LanguageSwitcher() {
                 <Button
                     variant="outline"
                     size="icon"
-                    className="overflow-hidden rounded-full p-6"
+                    className="overflow-hidden rounded-full md:p-6 text-gray-600"
                 >
                     {currentLocale.toUpperCase()}
                 </Button>

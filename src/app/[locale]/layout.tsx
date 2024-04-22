@@ -39,7 +39,7 @@ export default async function layout({
     const { resources } = await initTranslations(locale, TRANSlATIONS_NAMESPACES)
     return (
         <html lang={locale} dir={dir(locale)}>
-            <body className={cn(inter.className, "w-full flex justify-center")}>
+            <body className={cn(inter.className, "w-full flex justify-center bg-gray-100")}>
                 <div className="w-full max-w-[1728px]">
                     <TranslationProvider
                         locale={locale}

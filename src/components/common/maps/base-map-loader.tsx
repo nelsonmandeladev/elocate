@@ -27,9 +27,11 @@ const render = (status: Status) => {
         case Status.LOADING:
             return <div className="h-full w-full flex justify-center items-center">Loading...</div>
         case Status.FAILURE:
-            return <div>Failure</div>;
+            return <div className='w-full h-full flex justify-center items-center'>
+                Failed to load the map
+            </div>;
         case Status.SUCCESS:
-            return <div>Success</div>;
+            return <div className='w-full h-full flex justify-center items-center'>Success</div>;
     }
 };
 

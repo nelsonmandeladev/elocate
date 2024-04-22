@@ -1,7 +1,20 @@
 {
     "login_btn": "Connexion",
+    "key_sign_up": "Creer un compte",
     "register_btn": "S'inscrire",
     "key_fr": "French",
     "key_en": "English",
-    "add_location_btn": "Ajouter une place"
+    "add_location_btn": "Ajouter une place",
+    "login_title": "Connexion",
+    "login_sub_title": "Entrer votre email pour vous connecter a votre compte. Vous pouvez aussi Google ou Facebook pour continuer",
+    "login_required": "Compte requis",
+    "key_email": "Email",
+    "key_password": "Mot de passe",
+    "forgot_password": "Mot de passe oublie?",
+    "login_with_google": "Connexion avec Google",
+    "login_with_facebook": "Connexion avec Facebook",
+    "no_account_text": "Vous n'avez pas de compte?",
+    "login_required_add_location": "Vous devez être connecté pour commencer à ajouter un nouvel emplacement.",
+    "key_warning": "Attention",
+    "enter_password_placeholder": "Entrer votre mot de passe"
 }
