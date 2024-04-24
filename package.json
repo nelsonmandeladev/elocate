@@ -10,7 +10,8 @@
     "db:push": "prisma db push --accept-data-loss",
     "db:studio": "prisma studio",
     "db:gen": "prisma generate",
-    "db:seed": "npx prisma db seed"
+    "db:seed": "npx prisma db seed",
+    "postinstall": "prisma generate"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
