@@ -6,3 +6,4 @@ export * from "./label";
 export * from "./input";
 export * from "./separator";
 export * from "./alert";
+export * from "./form";

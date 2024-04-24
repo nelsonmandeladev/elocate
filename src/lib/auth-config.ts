@@ -1,23 +1,25 @@
 import NextAuth from "next-auth"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import prisma from "./prisma"
-import GoogleProvider from "next-auth/providers/google"
-import FacebookProvider from "next-auth/providers/facebook"
+import Google from "next-auth/providers/google"
+import Facebook from "next-auth/providers/facebook"
+import Resend from "next-auth/providers/resend"
+
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
     adapter: PrismaAdapter(prisma),
     providers: [
-        GoogleProvider({
-            clientId: process.env.AUTH_GOOGLE_ID,
-            clientSecret: process.env.AUTH_GOOGLE_SECRET
+        Google,
+        Facebook,
+        Resend({
+            from: "no-reply@elocate.nelsonmandeladev.dev",
         }),
-        FacebookProvider({
-            clientId: process.env.AUTH_FACEBOOK_ID,
-            clientSecret: process.env.AUTH_FACEBOOK_SECRET
-        })
     ],
     pages: {
-        signIn: "/login"
+        signIn: "/login",
+        error: "/error",
+        newUser: "/register-success",
+        verifyRequest: "/confirm-account"
     }
 
 })

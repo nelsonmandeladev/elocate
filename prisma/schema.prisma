@@ -23,6 +23,8 @@ model User {
   sessions      Session[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
+
+  passwordString String?
   
   isSuperUser Boolean @default(false)
   createdAt DateTime @default(now())

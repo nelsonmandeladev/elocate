@@ -5,18 +5,38 @@ import {
     CardContent,
     CardDescription,
     CardHeader,
-    CardTitle,
     Input,
-    Label,
     Button,
-    Separator
+    Separator,
+    Form,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormControl,
+    FormMessage
 } from "@/components/"
 import Image from "next/image";
 import { signIn } from "next-auth/react"
 import { useTranslation } from "react-i18next";
+import { useForm } from "react-hook-form"
+import { SingFormType, signInSchema } from "@/types";
+import { zodResolver } from "@hookform/resolvers/zod"
 
 export function LoginForm() {
     const { t } = useTranslation();
+    const form = useForm<SingFormType>({
+        resolver: zodResolver(signInSchema),
+        defaultValues: {
+            email: "",
+        }
+    })
+
+    async function onSubmit(data: SingFormType) {
+        const response = await signIn('resend', {
+            email: data.email,
+        });
+        console.log({ response })
+    }
     return (
         <Card className="w-full border-0 shadow-none p-0">
             <CardHeader className="p-0 py-6 mb-5">
@@ -26,40 +46,34 @@ export function LoginForm() {
                 </CardDescription>
             </CardHeader>
             <CardContent className="p-0">
-                <div className="grid gap-4">
-                    <div className="grid gap-2">
-                        <Label htmlFor="email">
-                            {t("common:key_email")}
-                        </Label>
-                        <Input
-                            id="email"
-                            type="email"
-                            placeholder="m@example.com"
-                            required
-                            className="bg-gray-50 py-6"
+                <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+                        <FormField
+                            control={form.control}
+                            name="email"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>
+                                        {t("common:key_email")}
+                                    </FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            placeholder="m@example.com"
+                                            className="bg-gray-100 py-6"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
                         />
-                    </div>
-                    <div className="grid gap-2">
-                        <div className="flex items-center">
-                            <Label htmlFor="password">
-                                {t("common:key_password")}
-                            </Label>
-                            <Link href="#" className="ml-auto inline-block text-sm underline">
-                                {t("common:forgot_password")}
-                            </Link>
-                        </div>
-                        <Input
-                            id="password"
-                            type="password"
-                            required
-                            className="bg-gray-50 py-6"
-                            placeholder={t("common:enter_password_placeholder")}
-                        />
-                    </div>
-                    <Button type="submit" className="w-full">
-                        {t("common:login_btn")}
-                    </Button>
-                    <Separator className="mt-5" />
+                        <Button type="submit" className="w-full">
+                            {t("common:login_btn")}
+                        </Button>
+                    </form>
+                </Form>
+                <div className="grid gap-4 mt-8">
+                    <Separator />
                     <div className="flex flex-col w-full gap-5">
                         <Button
                             variant="outline"
@@ -92,12 +106,6 @@ export function LoginForm() {
                             {t("common:login_with_facebook")}
                         </Button>
                     </div>
-                </div>
-                <div className="mt-4 text-center text-sm">
-                    {t("common:no_account_text")}
-                    <Link href="#" className="underline">
-                        {t("common:key_sign_up")}
-                    </Link>
                 </div>
             </CardContent>
         </Card>
