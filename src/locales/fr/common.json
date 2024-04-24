@@ -17,5 +17,7 @@
     "no_account_text": "Vous n'avez pas de compte?",
     "login_required_add_location": "Vous devez être connecté pour commencer à ajouter un nouvel emplacement.",
     "key_warning": "Attention",
-    "enter_password_placeholder": "Entrer votre mot de passe"
+    "enter_password_placeholder": "Entrer votre mot de passe",
+    "new_location": "Ajouter un emplacement",
+    "select_image_btn": "Ajouter une image pour ce lieu"
 }

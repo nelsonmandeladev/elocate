@@ -24,8 +24,10 @@ export async function POST(request: Request): Promise<NextResponse> {
 
         const storage = await createVercelBlob(session?.user?.id, blog);
 
-        return NextResponse.json({ storage }, { status: 201 })
+        return NextResponse.json(storage, { status: 201 })
     } catch (error) {
         return NextResponse.json({ error: "An error occurred while saved the file" }, { status: 500 });
     }
 }
+
+

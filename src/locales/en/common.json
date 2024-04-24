@@ -17,5 +17,7 @@
     "no_account_text": "Don't have an account?",
     "login_required_add_location": "You must be logged in to start adding new location",
     "key_warning": "Warning",
-    "enter_password_placeholder": "Enter your password"
+    "enter_password_placeholder": "Enter your password",
+    "new_location": "Add new location",
+    "select_image_btn": "Add an image for this location"
 }

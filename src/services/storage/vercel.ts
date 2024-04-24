@@ -12,6 +12,14 @@ export async function createVercelBlob(userId: string, file: PutBlobResult) {
             pathname: file.pathname
         },
         select: {
+            contentDisposition: true,
+            contentType: true,
+            createdAt: true,
+            downloadUrl: true,
+            id: true,
+            pathname: true,
+            updatedAt: true,
+            url: true,
             user: {
                 select: {
                     id: true,
@@ -20,10 +28,71 @@ export async function createVercelBlob(userId: string, file: PutBlobResult) {
                     image: true,
                     updatedAt: true,
                     createdAt: true,
-                }
+                },
+
             }
         }
     });
 
     return storage
+}
+
+export async function listBlobsByUserId(userId: string) {
+    const storages = await prisma.storage.findMany({
+        where: {
+            userId: userId
+        },
+        select: {
+            contentDisposition: true,
+            contentType: true,
+            createdAt: true,
+            downloadUrl: true,
+            id: true,
+            pathname: true,
+            updatedAt: true,
+            url: true,
+        }
+    });
+
+    return storages
+
+}
+
+
+export async function listBlobs() {
+    const storages = await prisma.storage.findMany({
+        select: {
+            contentDisposition: true,
+            contentType: true,
+            createdAt: true,
+            downloadUrl: true,
+            id: true,
+            pathname: true,
+            updatedAt: true,
+            url: true,
+            user: {
+                select: {
+                    id: true,
+                    email: true,
+                    name: true,
+                    image: true,
+                    updatedAt: true,
+                    createdAt: true,
+                },
+
+            }
+        }
+    });
+
+    return storages;
+}
+
+export async function deleteBlob(blogId: string) {
+    const blob = await prisma.storage.delete({
+        where: {
+            id: blogId
+        }
+    });
+
+    return true;
 }
