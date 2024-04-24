@@ -7,3 +7,5 @@ export * from "./input";
 export * from "./separator";
 export * from "./alert";
 export * from "./form";
+export * from "./dialog";
+export * from "./drawer";

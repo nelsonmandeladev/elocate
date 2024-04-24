@@ -5,10 +5,22 @@ import { LocationsMap, Show } from '../common'
 import { useMapManagementHomeStore } from '@/store';
 import { Session } from 'next-auth';
 import { cn } from '@/lib';
-import { Alert, AlertDescription, AlertTitle, Button } from '../ui';
-import { CircleAlert, Terminal, X } from 'lucide-react';
+import {
+    Alert,
+    AlertDescription,
+    Button,
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+} from '../ui';
+import { X } from 'lucide-react';
 import { LoginForm } from '../forms';
 import { useTranslation } from 'react-i18next';
+import CreateLocationForm from '../forms/create-location';
+import { useMediaQuery } from '@/hooks';
 
 
 interface MapSectionProps {
@@ -16,21 +28,72 @@ interface MapSectionProps {
 }
 export function MapSection({ session }: MapSectionProps) {
     const { showFeaturesPanel, setShowFeaturePanel } = useMapManagementHomeStore();
-    const { t } = useTranslation()
+    const { t } = useTranslation();
+    const isDesktop = useMediaQuery("(min-width: 768px)");
+
+    if (!isDesktop) {
+        return (
+            <div
+                className={`h-full w-full relative flex md:p-6 lg:px-6 xl:px-6 3xl:px-0`}
+            >
+                <Drawer open={showFeaturesPanel} onOpenChange={(_open) => setShowFeaturePanel(_open)}>
+                    <DrawerContent className='h-[calc(100dvh-30px)]'>
+                        <DrawerHeader className="text-left">
+                            <DrawerTitle>
+                                <h4 className="text-xl text-gray-600 font-semibold">
+                                    {t("common:login_required")}
+                                </h4>
+                            </DrawerTitle>
+                        </DrawerHeader>
+                        <div className="px-3 mt-8">
+                            <Show>
+                                <Show.When
+                                    isTrue={session?.user ? true : false}
+                                >
+                                    <CreateLocationForm />
+                                </Show.When>
+                                <Show.Else
+                                >
+                                    <Alert>
+                                        <AlertDescription className='flex justify-start gap-2 text-yellow-600'>
+                                            {t("common:login_required_add_location")}
+                                        </AlertDescription>
+                                    </Alert>
+                                    <LoginForm />
+                                </Show.Else>
+                            </Show>
+                        </div>
+                        <DrawerFooter className="pt-2">
+                            <DrawerClose asChild>
+                                <Button size={"sm"} variant="outline">Cancel</Button>
+                            </DrawerClose>
+                        </DrawerFooter>
+                    </DrawerContent>
+                </Drawer>
+                <div className="h-full w-full relative">
+                    <LocationsMap />
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div
-            className={`h-full w-full relative grid md:p-6 lg:px-6 xl:px-6 3xl:px-0 ${showFeaturesPanel ? 'grid-cols-[500px,1fr] gap-10' : 'grid-cols-[0,1fr]'}`}
+            className={`h-full w-full relative flex md:p-6 lg:px-6 xl:px-6 3xl:px-0`}
         >
-            <div className={cn("w-full relative")}>
-                <div className={cn("absolute bg-white rounded-[10px] w-full h-full flex flex-col overflow-y-auto", !showFeaturesPanel && "hidden")}>
+            <div
+                className={cn("bg-white rounded-[10px] h-full hidden md:flex flex-col overflow-y-auto",
+                    showFeaturesPanel ? "min-w-[30%] max-w-[30%] mr-6" : "w-0")}
+            >
+                <div className={cn(showFeaturesPanel ? "flex flex-col w-full" : "hidden")}>
                     <div className="sticky bg-white top-0 z-10 flex w-full justify-between items-center px-5 py-2 shadow-sm">
                         <h4 className="text-xl text-gray-600 font-semibold">
                             {t("common:login_required")}
                         </h4>
                         <Button
                             size={"icon"}
-                            variant={"outline"}
-                            className='rounded-full text-gray-600'
+                            variant={"ghost"}
+                            className='text-gray-600 text-sm'
                             onClick={() => setShowFeaturePanel(false)}
                         >
                             <X />
@@ -41,9 +104,7 @@ export function MapSection({ session }: MapSectionProps) {
                             <Show.When
                                 isTrue={session?.user ? true : false}
                             >
-                                <div className="">
-                                    Logged in
-                                </div>
+                                <CreateLocationForm />
                             </Show.When>
                             <Show.Else
                             >
@@ -58,7 +119,7 @@ export function MapSection({ session }: MapSectionProps) {
                     </div>
                 </div>
             </div>
-            <div className="h-full w-full transition-all duration-500 relative">
+            <div className="h-full w-full relative">
                 <LocationsMap />
             </div>
         </div>
