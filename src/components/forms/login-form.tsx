@@ -79,7 +79,7 @@ export function LoginForm() {
                             variant="outline"
                             className="w-full font-normal text-gray-600 flex gap-3"
                             onClick={() => signIn("google", {
-                                redirect: true
+                                redirect: true,
                             })}
                         >
                             <Image
