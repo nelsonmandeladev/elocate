@@ -43,20 +43,20 @@ export function LanguageSwitcher() {
                 <Button
                     variant="outline"
                     size="icon"
-                    className="overflow-hidden rounded-full"
+                    className="overflow-hidden rounded-full md:p-6 text-gray-600"
                 >
                     {currentLocale.toUpperCase()}
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
                 <DropdownMenuItem
-                    className={cn(currentLocale === "en" && "bg-foreground text-white hover:bg-foreground/90", 'cursor-pointer')}
+                    className={cn(currentLocale === "en" && "bg-primary text-white hover:bg-primary/90", 'cursor-pointer')}
                     onClick={() => onLanguageChange("en")}
                 >
                     {t("common:key_en")}
                 </DropdownMenuItem>
                 <DropdownMenuItem
-                    className={cn(currentLocale === "fr" && "bg-foreground text-white", 'cursor-pointer')}
+                    className={cn(currentLocale === "fr" && "bg-primary text-white", 'cursor-pointer')}
                     onClick={() => onLanguageChange("fr")}
                 >
                     {t("common:key_fr")}

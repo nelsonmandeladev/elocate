@@ -24,7 +24,8 @@ model User {
   // Optional for WebAuthn support
   Authenticator Authenticator[]
 
-  passwordString String
+  passwordString String?
+  
   isSuperUser Boolean @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
