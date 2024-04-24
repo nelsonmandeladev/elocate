@@ -90,7 +90,7 @@ export function LoginForm() {
                             />
                             {t("common:login_with_google")}
                         </Button>
-                        <Button
+                        {/*<Button
                             variant="outline"
                             className="w-full font-normal text-gray-600 flex gap-3"
                             onClick={() => signIn("facebook", {
@@ -104,7 +104,7 @@ export function LoginForm() {
                                 height={24}
                             />
                             {t("common:login_with_facebook")}
-                        </Button>
+                        </Button> */}
                     </div>
                 </div>
             </CardContent>
