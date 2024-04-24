@@ -42,7 +42,7 @@ export function UploadFilesToVercel({ trigger }: UploadFilesToVercelProps) {
     if (!isDesktop) {
         return (
             <Drawer open={open} onOpenChange={setOpen}>
-                <DrawerTrigger>
+                <DrawerTrigger className="w-full">
                     <Show>
                         <Show.When
                             isTrue={trigger ? true : false}
@@ -58,14 +58,14 @@ export function UploadFilesToVercel({ trigger }: UploadFilesToVercelProps) {
                         </Show.When>
                     </Show>
                 </DrawerTrigger>
-                <DrawerContent className='h-[calc(100dvh-70px)]'>
+                <DrawerContent className='h-[calc(100dvh-70px)] bg-gray-100'>
                     <DrawerHeader className="text-left">
                         <DrawerTitle>Edit profile</DrawerTitle>
                         <DrawerDescription>
                             {"Make changes to your profile here. Click save when you're done."}
                         </DrawerDescription>
                     </DrawerHeader>
-                    <div className="px-4">
+                    <div className="px-4 mt-4">
                         <UploadFilesToVercelForm />
                     </div>
                     <DrawerFooter className="pt-2">
@@ -80,7 +80,7 @@ export function UploadFilesToVercel({ trigger }: UploadFilesToVercelProps) {
 
     return (
         <Dialog>
-            <DialogTrigger>
+            <DialogTrigger className="w-full">
                 <Show>
                     <Show.When
                         isTrue={trigger ? true : false}
@@ -102,7 +102,7 @@ export function UploadFilesToVercel({ trigger }: UploadFilesToVercelProps) {
                     <DialogDescription>
                         {" Make changes to your profile here. Click save when you're done."}
                     </DialogDescription>
-                    <div className="h-full w-full">
+                    <div className="h-full w-full pt-5">
                         <UploadFilesToVercelForm />
                     </div>
                 </DialogHeader>

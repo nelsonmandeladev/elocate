@@ -37,15 +37,15 @@ export function MapSection({ session }: MapSectionProps) {
                 className={`h-full w-full relative flex md:p-6 lg:px-6 xl:px-6 3xl:px-0`}
             >
                 <Drawer open={showFeaturesPanel} onOpenChange={(_open) => setShowFeaturePanel(_open)}>
-                    <DrawerContent className='h-[calc(100dvh-30px)]'>
+                    <DrawerContent className='h-[calc(100dvh-30px)] bg-gray-100'>
                         <DrawerHeader className="text-left">
                             <DrawerTitle>
                                 <h4 className="text-xl text-gray-600 font-semibold">
-                                    {t("common:login_required")}
+                                    {session ? t("common:new_location") : t("common:login_required")}
                                 </h4>
                             </DrawerTitle>
                         </DrawerHeader>
-                        <div className="px-3 mt-8">
+                        <div className="px-3 mt-8 w-full">
                             <Show>
                                 <Show.When
                                     isTrue={session?.user ? true : false}
@@ -88,7 +88,7 @@ export function MapSection({ session }: MapSectionProps) {
                 <div className={cn(showFeaturesPanel ? "flex flex-col w-full" : "hidden")}>
                     <div className="sticky bg-white top-0 z-10 flex w-full justify-between items-center px-5 py-2 shadow-sm">
                         <h4 className="text-xl text-gray-600 font-semibold">
-                            {t("common:login_required")}
+                            {session ? t("common:new_location") : t("common:login_required")}
                         </h4>
                         <Button
                             size={"icon"}
@@ -99,7 +99,7 @@ export function MapSection({ session }: MapSectionProps) {
                             <X />
                         </Button>
                     </div>
-                    <div className="p-5 z-0">
+                    <div className="p-5 z-0 w-full">
                         <Show>
                             <Show.When
                                 isTrue={session?.user ? true : false}
