@@ -46,7 +46,7 @@ export function LoginForm() {
                 </CardDescription>
             </CardHeader>
             <CardContent className="p-0">
-                <Form {...form}>
+                {/* <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
                         <FormField
                             control={form.control}
@@ -71,9 +71,9 @@ export function LoginForm() {
                             {t("common:login_btn")}
                         </Button>
                     </form>
-                </Form>
+                </Form> */}
                 <div className="grid gap-4 mt-8">
-                    <Separator />
+                    {/* <Separator /> */}
                     <div className="flex flex-col w-full gap-5">
                         <Button
                             variant="outline"

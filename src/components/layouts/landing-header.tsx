@@ -80,7 +80,7 @@ export function LandingPageHeader({ session }: LandingPageHeaderProps) {
                                         className="overflow-hidden rounded-full"
                                     >
                                         <Image
-                                            src={session?.user?.image || ""}
+                                            src={session?.user?.image || "https://xbdgwqtbznvmtego.public.blob.vercel-storage.com/image-holder-2pmCXbVYo0ZyBj3NRMBlnZeoR3xklh.png"}
                                             width={36}
                                             height={36}
                                             alt="Avatar"

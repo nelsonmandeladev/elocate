@@ -17,7 +17,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     ],
     pages: {
         signIn: "/login",
-        error: "/error",
         newUser: "/register-success",
         verifyRequest: "/confirm-account"
     }
