@@ -19,5 +19,6 @@
     "key_warning": "Attention",
     "enter_password_placeholder": "Entrer votre mot de passe",
     "new_location": "Ajouter un emplacement",
-    "select_image_btn": "Ajouter une image pour ce lieu"
+    "select_image_btn": "Ajouter une image pour ce lieu",
+    "add_media_trigger_btn": "Selectionner un media"
 }

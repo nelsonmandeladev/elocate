@@ -2,7 +2,6 @@
 
 import {
     ReactNode,
-    useCallback,
     useState
 } from "react";
 
@@ -26,8 +25,9 @@ import {
 } from "@/components"
 
 import { Show } from "../../renderers";
-import { useDropzone } from 'react-dropzone'
 import { useMediaQuery } from "@/hooks";
+import { CloudUpload } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface UploadFilesToVercelProps {
     trigger?: ReactNode
@@ -37,6 +37,7 @@ export function UploadFilesToVercel({ trigger }: UploadFilesToVercelProps) {
 
     const [open, setOpen] = useState<boolean>(false);
     const isDesktop = useMediaQuery("(min-width: 768px)");
+    const { t } = useTranslation();
 
 
     if (!isDesktop) {
@@ -52,8 +53,13 @@ export function UploadFilesToVercel({ trigger }: UploadFilesToVercelProps) {
                         <Show.When
                             isTrue={!trigger ? true : false}
                         >
-                            <Button size={"icon"} variant={"outline"}>
-                                Ajouter une image
+                            <Button
+                                className='flex justify-center gap-5 items-center py-8 w-full bg-gray-100 text-gray-600 font-normal'
+                                variant={"outline"}
+                                size={"lg"}
+                            >
+                                <CloudUpload />
+                                {t("common:add_media_trigger_btn")}
                             </Button>
                         </Show.When>
                     </Show>
@@ -90,8 +96,13 @@ export function UploadFilesToVercel({ trigger }: UploadFilesToVercelProps) {
                     <Show.When
                         isTrue={!trigger ? true : false}
                     >
-                        <Button size={"icon"} variant={"outline"}>
-                            Ajouter une image
+                        <Button
+                            className='flex justify-center gap-5 items-center py-8 w-full bg-gray-100 text-gray-600 font-normal'
+                            variant={"outline"}
+                            size={"lg"}
+                        >
+                            <CloudUpload />
+                            {t("common:add_media_trigger_btn")}
                         </Button>
                     </Show.When>
                 </Show>
