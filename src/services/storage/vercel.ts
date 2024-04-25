@@ -51,6 +51,9 @@ export async function listBlobsByUserId(userId: string) {
             pathname: true,
             updatedAt: true,
             url: true,
+        },
+        orderBy: {
+            createdAt: "desc"
         }
     });
 

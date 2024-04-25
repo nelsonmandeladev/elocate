@@ -1,2 +1,2 @@
 export * from "./base-uploader";
-export * from "./unloader-form";
+export * from "./uploader-form";

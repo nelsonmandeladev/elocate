@@ -9,3 +9,6 @@ export * from "./alert";
 export * from "./form";
 export * from "./dialog";
 export * from "./drawer";
+export * from "./spinner";
+export * from "./scroll-area";
+export * from "./skeleton";
