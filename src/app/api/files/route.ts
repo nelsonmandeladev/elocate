@@ -47,7 +47,7 @@ export async function POST(request: Request): Promise<NextResponse> {
                 session.user.id,
                 file
             );
-            const s3Response = await fetch(s3PresignedUrl, {
+            await fetch(s3PresignedUrl, {
                 method: "PUT",
                 body: file,
                 headers: {
