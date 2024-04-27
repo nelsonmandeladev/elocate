@@ -1,15 +1,15 @@
 import prisma from "@/lib/prisma";
-import { PutBlobResult } from "@vercel/blob";
+import { createStorageType } from "@/types/app.type";
 
-export async function createVercelBlob(userId: string, file: PutBlobResult) {
+export async function createStorage(userId: string, file: createStorageType) {
     const storage = await prisma.storage.create({
         data: {
             userId: userId,
-            contentDisposition: file.contentDisposition,
-            contentType: file.contentType,
-            downloadUrl: file.downloadUrl,
+            contentDisposition: file.contentDisposition ?? "",
+            contentType: file.contentType ?? "",
+            downloadUrl: file.downloadUrl ?? "",
             url: file.url,
-            pathname: file.pathname
+            pathname: file.pathname ?? ""
         },
         select: {
             contentDisposition: true,
@@ -37,7 +37,7 @@ export async function createVercelBlob(userId: string, file: PutBlobResult) {
     return storage
 }
 
-export async function listBlobsByUserId(userId: string) {
+export async function listStoragesByUserId(userId: string) {
     const storages = await prisma.storage.findMany({
         where: {
             userId: userId
@@ -62,7 +62,7 @@ export async function listBlobsByUserId(userId: string) {
 }
 
 
-export async function listBlobs() {
+export async function listStorages() {
     const storages = await prisma.storage.findMany({
         select: {
             contentDisposition: true,
@@ -90,8 +90,8 @@ export async function listBlobs() {
     return storages;
 }
 
-export async function deleteBlob(blogId: string) {
-    const blob = await prisma.storage.delete({
+export async function deleteStorage(blogId: string) {
+    await prisma.storage.delete({
         where: {
             id: blogId
         }

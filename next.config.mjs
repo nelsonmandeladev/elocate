@@ -10,6 +10,10 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'xbdgwqtbznvmtego.public.blob.vercel-storage.com',
             },
+            {
+                protocol: 'https',
+                hostname: 'elocate.s3.eu-north-1.amazonaws.com',
+            },
         ]
     }
 };

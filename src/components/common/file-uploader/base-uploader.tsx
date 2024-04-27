@@ -24,7 +24,7 @@ import {
     UploadFilesToVercelForm
 } from "@/components"
 
-import { Show } from "../../renderers";
+import { Show } from "../renderers";
 import { useMediaQuery } from "@/hooks";
 import { CloudUpload } from "lucide-react";
 import { useTranslation } from "react-i18next";

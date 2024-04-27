@@ -45,7 +45,7 @@ export function BaseMap({ children }: BaseMapProps): JSX.Element {
     return (
         <Wrapper
             apiKey={"AIzaSyCWlp-Raz_hqojhGljCT8R2MU4kIgJGuAc"}
-            render={render}
+            render={(status) => render(status)}
             libraries={["marker", "maps"]}
             version='beta'
         >
