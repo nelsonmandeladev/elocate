@@ -7,7 +7,7 @@ import { CheckCircle, Grid, List, UploadCloud } from 'lucide-react';
 import Image from 'next/image';
 import React, { Fragment, useCallback, useEffect, useState, useTransition } from 'react'
 import { useDropzone } from 'react-dropzone';
-import { EachRenderer } from '../../renderers/list-items';
+import { EachRenderer } from '../renderers/list-items';
 
 export function UploadFilesToVercelForm() {
     const [storage, setStorage] = useState<StorageType | null>(null);
@@ -18,7 +18,7 @@ export function UploadFilesToVercelForm() {
 
     const handleSaveFile = useCallback((formData: FormData) => {
         startTransitions(async () => {
-            const response = await fetch("/api/files", {
+            const response = await fetch("/api/files?destination=aws-s3", {
                 method: "POST",
                 body: formData
             });
@@ -38,8 +38,8 @@ export function UploadFilesToVercelForm() {
         const formData: FormData = new FormData();
         formData.append("file", acceptedFiles[0]);
 
-        debounce(async () => {
-            await handleSaveFile(formData);
+        debounce(() => {
+            handleSaveFile(formData);
         }, 1000)();
 
     }, [handleSaveFile]);
@@ -120,7 +120,7 @@ export function UploadFilesToVercelForm() {
                         of={storages}
                         render={(item) => (
                             <div
-                                className={cn("aspect-auto object-cover rounded relative cursor-pointer")}
+                                className={cn("aspect-auto rounded relative cursor-pointer min-h-[175px] max-h-[175px]")}
                                 onClick={() => setStorage(item)}
                             >
                                 <Image
@@ -128,7 +128,7 @@ export function UploadFilesToVercelForm() {
                                     alt={item.pathname}
                                     width={100}
                                     height={100}
-                                    className='w-full h-full rounded'
+                                    className='w-full h-full rounded object-cover'
                                 />
                                 {item.id === storage?.id ?
                                     <div className="absolute text-white left-1 top-1">

@@ -25,13 +25,14 @@ model User {
   Authenticator Authenticator[]
 
   passwordString String?
-  storages Storage[]
+  storages       Storage[]
+  locations      Location[]
 
-  isSuperUser Boolean @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  isSuperUser Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
- 
+
 model Account {
   id                String  @id @default(auto()) @map("_id") @db.ObjectId
   userId            String  @db.ObjectId
@@ -45,35 +46,35 @@ model Account {
   scope             String?
   id_token          String? @db.String
   session_state     String?
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
- 
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@unique([provider, providerAccountId])
 }
- 
+
 model Session {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   sessionToken String   @unique
   userId       String   @db.ObjectId
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
- 
+
 model VerificationToken {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   identifier String
   token      String
   expires    DateTime
- 
+
   @@unique([identifier, token])
 }
- 
+
 // Optional for WebAuthn support
 model Authenticator {
   id                   String  @id @default(auto()) @map("_id") @db.ObjectId
@@ -85,21 +86,30 @@ model Authenticator {
   credentialDeviceType String
   credentialBackedUp   Boolean
   transports           String?
- 
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Storage {
-  id                String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String  @db.ObjectId
-  contentDisposition              String
-  downloadUrl String
-  pathname String
-  url String
-  contentType String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
- 
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId             String   @db.ObjectId
+  contentDisposition String?
+  downloadUrl        String?
+  pathname           String?
+  url                String
+  contentType        String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+  location Location[]
+}
+
+model Location {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  userId  String @db.ObjectId
+  imageId String @db.ObjectId
+
+  use     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  image Storage @relation(fields: [imageId], references: [id], onDelete: Cascade)
 }

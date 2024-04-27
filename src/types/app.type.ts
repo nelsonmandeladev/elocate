@@ -24,3 +24,17 @@ export type StorageType = {
     updatedAt: string;
     user: UserType
 }
+
+export type createStorageType = {
+    contentDisposition?: string;
+    downloadUrl?: string
+    pathname?: string
+    url: string
+    contentType?: string
+}
+
+export type AwsGetSignedUrlParams = {
+    fileType: string
+    fileSize: number
+    checksum: string
+}
