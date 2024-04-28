@@ -9,7 +9,13 @@ import React, { Fragment, useCallback, useEffect, useState, useTransition } from
 import { useDropzone } from 'react-dropzone';
 import { EachRenderer } from '../renderers/list-items';
 
-export function UploadFilesToVercelForm() {
+
+interface UploadFilesFormProps {
+
+}
+
+
+export function UploadFilesForm() {
     const [storage, setStorage] = useState<StorageType | null>(null);
     const [storages, setStorages] = useState<StorageType[]>([]);
     const [isPending, startTransitions] = useTransition();
@@ -120,7 +126,7 @@ export function UploadFilesToVercelForm() {
                         of={storages}
                         render={(item) => (
                             <div
-                                className={cn("aspect-auto rounded relative cursor-pointer min-h-[175px] max-h-[175px]")}
+                                className={cn("aspect-auto rounded relative cursor-pointer h-[75px] md:min-h-[180px] md:max-h-[180px]")}
                                 onClick={() => setStorage(item)}
                             >
                                 <Image

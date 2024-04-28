@@ -20,5 +20,6 @@
     "enter_password_placeholder": "Enter your password",
     "new_location": "Add new location",
     "select_image_btn": "Add an image for this location",
-    "add_media_trigger_btn": "Select a media"
+    "add_media_trigger_btn": "Select a media",
+    "key_cancel": "Cancel"
 }

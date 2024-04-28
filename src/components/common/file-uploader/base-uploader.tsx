@@ -21,7 +21,7 @@ import {
     DrawerTitle,
     DrawerTrigger,
     Button,
-    UploadFilesToVercelForm
+    UploadFilesForm
 } from "@/components"
 
 import { Show } from "../renderers";
@@ -29,11 +29,11 @@ import { useMediaQuery } from "@/hooks";
 import { CloudUpload } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-interface UploadFilesToVercelProps {
+interface UploadFilesProps {
     trigger?: ReactNode
 }
 
-export function UploadFilesToVercel({ trigger }: UploadFilesToVercelProps) {
+export function UploadFiles({ trigger }: UploadFilesProps) {
 
     const [open, setOpen] = useState<boolean>(false);
     const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -72,11 +72,13 @@ export function UploadFilesToVercel({ trigger }: UploadFilesToVercelProps) {
                         </DrawerDescription>
                     </DrawerHeader>
                     <div className="px-4 mt-4">
-                        <UploadFilesToVercelForm />
+                        <UploadFilesForm />
                     </div>
                     <DrawerFooter className="pt-2">
                         <DrawerClose asChild>
-                            <Button size={"sm"} variant="outline">Cancel</Button>
+                            <Button className='text-sm text-gray-500' size={"sm"} variant="outline">
+                                {t("common:key_cancel")}
+                            </Button>
                         </DrawerClose>
                     </DrawerFooter>
                 </DrawerContent>
@@ -114,7 +116,7 @@ export function UploadFilesToVercel({ trigger }: UploadFilesToVercelProps) {
                         {" Make changes to your profile here. Click save when you're done."}
                     </DialogDescription>
                     <div className="h-full w-full pt-5">
-                        <UploadFilesToVercelForm />
+                        <UploadFilesForm />
                     </div>
                 </DialogHeader>
             </DialogContent>
