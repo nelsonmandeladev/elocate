@@ -52,6 +52,7 @@ function LocationsMapLoader() {
             <CurrentLocationMarker
                 map={map}
                 position={currentLocation}
+
             />
         </>
     )

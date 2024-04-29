@@ -66,9 +66,11 @@ export function UploadFiles({ trigger }: UploadFilesProps) {
                 </DrawerTrigger>
                 <DrawerContent className='h-[calc(100dvh-70px)] bg-gray-100'>
                     <DrawerHeader className="text-left">
-                        <DrawerTitle>Edit profile</DrawerTitle>
+                        <DrawerTitle>
+                            {t("common:media_manager_title")}
+                        </DrawerTitle>
                         <DrawerDescription>
-                            {"Make changes to your profile here. Click save when you're done."}
+                            {t("common:media_manager_content")}
                         </DrawerDescription>
                     </DrawerHeader>
                     <div className="px-4 mt-4">
@@ -111,9 +113,11 @@ export function UploadFiles({ trigger }: UploadFilesProps) {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px] min-w-[800px] min-h-[600px] bg-gray-100">
                 <DialogHeader>
-                    <DialogTitle>Edit profile</DialogTitle>
+                    <DialogTitle>
+                        {t("common:media_manager_title")}
+                    </DialogTitle>
                     <DialogDescription>
-                        {" Make changes to your profile here. Click save when you're done."}
+                        {t("common:media_manager_content")}
                     </DialogDescription>
                     <div className="h-full w-full pt-5">
                         <UploadFilesForm />

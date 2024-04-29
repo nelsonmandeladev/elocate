@@ -1,12 +1,14 @@
 "use client";
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useCallback, useEffect, useRef } from "react";
 import { createRoot, Root } from "react-dom/client";
 
 
 interface MarkerProps {
     map: google.maps.Map | null;
     children: ReactNode;
-    position: google.maps.LatLngLiteral
+    position: google.maps.LatLngLiteral,
+    draggable?: boolean;
+    onDragEnd: (position: google.maps.LatLngLiteral) => void
 }
 
 
@@ -17,30 +19,46 @@ interface MarkerProps {
  * @param map - The map.
  * @returns A Marker component.
  */
-function BaseMarker({ map, position, children }: MarkerProps): ReactNode {
+function BaseMarker({ map, position, children, draggable, onDragEnd }: MarkerProps): ReactNode {
     const markerRef = useRef<google.maps.marker.AdvancedMarkerElement | null>(null);
     const rootRef = useRef<Root | null>(null);
 
-    useEffect(() => {
+    const initMarker = useCallback(() => {
         if (!rootRef.current) {
             const container = document.createElement("div");
             rootRef.current = createRoot(container);
 
             markerRef.current = new google.maps.marker.AdvancedMarkerElement({
                 position,
-                content: container
+                content: container,
+                gmpDraggable: draggable,
             });
 
+            markerRef.current.addListener('dragend', (event: google.maps.MapMouseEvent) => {
+                const position = event.latLng?.toJSON();
+                onDragEnd && onDragEnd(position as google.maps.LatLngLiteral)
+            });
         }
-    }, [position])
+    }, [draggable, position, onDragEnd])
 
-    useEffect(() => {
+
+    const initRootRef = useCallback(() => {
         rootRef.current?.render(children);
         if (markerRef.current) {
             markerRef.current.position = position;
             markerRef.current.map = map;
         }
-    }, [map, position, children]);
+    }, [map, position, children])
+
+
+
+    useEffect(() => {
+        initRootRef()
+    }, [initRootRef]);
+
+    useEffect(() => {
+        initMarker()
+    }, [initMarker])
 
     return <></>;
 }

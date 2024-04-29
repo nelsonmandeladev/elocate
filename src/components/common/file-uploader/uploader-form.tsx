@@ -3,7 +3,7 @@
 import { Button, Input, ScrollArea, Skeleton, Spinner } from '@/components';
 import { cn, debounce } from '@/lib';
 import { StorageType } from '@/types/app.type';
-import { CheckCircle, Grid, List, UploadCloud } from 'lucide-react';
+import { CheckCircle, Eye, Grid, List, UploadCloud } from 'lucide-react';
 import Image from 'next/image';
 import React, { Fragment, useCallback, useEffect, useState, useTransition } from 'react'
 import { useDropzone } from 'react-dropzone';
@@ -11,11 +11,13 @@ import { EachRenderer } from '../renderers/list-items';
 
 
 interface UploadFilesFormProps {
-
+    onStorageSelected?: (storage: StorageType) => void;
+    selectedStorage?: StorageType;
 }
 
 
-export function UploadFilesForm() {
+export function UploadFilesForm(props: UploadFilesFormProps) {
+    const { selectedStorage, onStorageSelected } = props;
     const [storage, setStorage] = useState<StorageType | null>(null);
     const [storages, setStorages] = useState<StorageType[]>([]);
     const [isPending, startTransitions] = useTransition();
@@ -71,6 +73,9 @@ export function UploadFilesForm() {
         handleFetchFiles();
     }, [handleFetchFiles])
 
+    useEffect(() => {
+        selectedStorage && setStorage(selectedStorage);
+    }, [selectedStorage]);
 
 
     return (
@@ -127,7 +132,10 @@ export function UploadFilesForm() {
                         render={(item) => (
                             <div
                                 className={cn("aspect-auto rounded relative cursor-pointer h-[75px] md:min-h-[180px] md:max-h-[180px]")}
-                                onClick={() => setStorage(item)}
+                                onClick={() => {
+                                    setStorage(item);
+                                    onStorageSelected && onStorageSelected(item);
+                                }}
                             >
                                 <Image
                                     src={item.url}
@@ -141,6 +149,14 @@ export function UploadFilesForm() {
                                         <CheckCircle className='' size={15} />
                                     </div> : null
                                 }
+                                <Button
+                                    size={"icon"} variant={"outline"} className="absolute right-1 bottom-1 bg-transparent text-white"
+                                    onClick={(event) => {
+                                        event.stopPropagation();
+                                    }}
+                                >
+                                    <Eye className='' size={20} />
+                                </Button>
                             </div>
                         )}
                     />

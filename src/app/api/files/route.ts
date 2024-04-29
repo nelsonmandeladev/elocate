@@ -25,7 +25,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     const destination = searchParams.get("destination");
 
     if (!destination) {
-        return NextResponse.json({ error: "The destination is required in the url params" }, { status: 401 })
+        return NextResponse.json({ error: "The destination is required in the url params" }, { status: 400 })
     }
 
     const form = await request.formData();
