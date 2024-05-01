@@ -65,7 +65,9 @@ export function MapSection({ session }: MapSectionProps) {
                         </div>
                         <DrawerFooter className="pt-2">
                             <DrawerClose asChild>
-                                <Button size={"sm"} variant="outline">Cancel</Button>
+                                <Button className='text-sm text-gray-500' size={"sm"} variant="outline">
+                                    {t("common:key_cancel")}
+                                </Button>
                             </DrawerClose>
                         </DrawerFooter>
                     </DrawerContent>
@@ -93,7 +95,7 @@ export function MapSection({ session }: MapSectionProps) {
                         <Button
                             size={"icon"}
                             variant={"ghost"}
-                            className='text-gray-600 text-sm'
+                            className='text-gray-500 text-sm'
                             onClick={() => setShowFeaturePanel(false)}
                         >
                             <X />

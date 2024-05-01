@@ -46,7 +46,7 @@ export function LandingPageHeader({ session }: LandingPageHeaderProps) {
                 ELOCATE {showFeaturesPanel}
             </div>
             <div className=""></div>
-            <div className="flex gap-2 items-center">
+            <div className="flex items-center justify-center gap-2">
                 <Button
                     className='hidden md:flex'
                     disabled={showFeaturesPanel}
@@ -77,14 +77,14 @@ export function LandingPageHeader({ session }: LandingPageHeaderProps) {
                                     <Button
                                         variant="outline"
                                         size="icon"
-                                        className="overflow-hidden rounded-full"
+                                        className="rounded-full"
                                     >
                                         <Image
                                             src={session?.user?.image || "https://xbdgwqtbznvmtego.public.blob.vercel-storage.com/image-holder-2pmCXbVYo0ZyBj3NRMBlnZeoR3xklh.png"}
                                             width={36}
                                             height={36}
                                             alt="Avatar"
-                                            className="overflow-hidden rounded-full"
+                                            className="rounded-full"
                                         />
                                     </Button>
                                 </DropdownMenuTrigger>

@@ -1,9 +1,10 @@
 "use client";
 
-import React from 'react'
+import React, { useTransition } from 'react'
 import BaseMarker from './base-marker';
-import { Button } from '@/components/ui';
-
+import { MapPin } from 'lucide-react';
+import { debounce } from '@/lib';
+import { Button, Spinner } from '@/components/ui';
 
 interface LocationMarkerProps {
     map: google.maps.Map | null;
@@ -13,14 +14,35 @@ interface LocationMarkerProps {
 
 export function CurrentLocationMarker(props: LocationMarkerProps) {
     const { map, position } = props;
+
+
+    async function handleReverseGeocoding(position: google.maps.LatLngLiteral) {
+        const response = await fetch("/api/geocoding", {
+            method: "POST",
+            body: JSON.stringify(position)
+        });
+        const responseData = await response.json() as google.maps.GeocoderResponse;
+        console.log({ responseData })
+    }
+    function handleDragEnd(position: google.maps.LatLngLiteral) {
+        debounce(async () => {
+            handleReverseGeocoding(position)
+        }, 1000)();
+    }
     return (
         <BaseMarker
             position={position}
             map={map}
+            draggable={true}
+            onDragEnd={(position) => {
+                handleDragEnd(position)
+            }}
+
         >
-            <Button variant={"outline"} size={"icon"} className='rounded-full p-6'>
-                ME
+            <Button size={"icon"} variant={"ghost"} className='size-[60px]'>
+                <MapPin className='text-primary cursor-pointer' size={60} />
             </Button>
+
         </BaseMarker>
     )
 }

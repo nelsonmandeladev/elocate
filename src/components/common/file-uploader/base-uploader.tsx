@@ -21,7 +21,7 @@ import {
     DrawerTitle,
     DrawerTrigger,
     Button,
-    UploadFilesToVercelForm
+    UploadFilesForm
 } from "@/components"
 
 import { Show } from "../renderers";
@@ -29,11 +29,11 @@ import { useMediaQuery } from "@/hooks";
 import { CloudUpload } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-interface UploadFilesToVercelProps {
+interface UploadFilesProps {
     trigger?: ReactNode
 }
 
-export function UploadFilesToVercel({ trigger }: UploadFilesToVercelProps) {
+export function UploadFiles({ trigger }: UploadFilesProps) {
 
     const [open, setOpen] = useState<boolean>(false);
     const isDesktop = useMediaQuery("(min-width: 768px)");
@@ -66,17 +66,21 @@ export function UploadFilesToVercel({ trigger }: UploadFilesToVercelProps) {
                 </DrawerTrigger>
                 <DrawerContent className='h-[calc(100dvh-70px)] bg-gray-100'>
                     <DrawerHeader className="text-left">
-                        <DrawerTitle>Edit profile</DrawerTitle>
+                        <DrawerTitle>
+                            {t("common:media_manager_title")}
+                        </DrawerTitle>
                         <DrawerDescription>
-                            {"Make changes to your profile here. Click save when you're done."}
+                            {t("common:media_manager_content")}
                         </DrawerDescription>
                     </DrawerHeader>
                     <div className="px-4 mt-4">
-                        <UploadFilesToVercelForm />
+                        <UploadFilesForm />
                     </div>
                     <DrawerFooter className="pt-2">
                         <DrawerClose asChild>
-                            <Button size={"sm"} variant="outline">Cancel</Button>
+                            <Button className='text-sm text-gray-500' size={"sm"} variant="outline">
+                                {t("common:key_cancel")}
+                            </Button>
                         </DrawerClose>
                     </DrawerFooter>
                 </DrawerContent>
@@ -109,12 +113,14 @@ export function UploadFilesToVercel({ trigger }: UploadFilesToVercelProps) {
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px] min-w-[800px] min-h-[600px] bg-gray-100">
                 <DialogHeader>
-                    <DialogTitle>Edit profile</DialogTitle>
+                    <DialogTitle>
+                        {t("common:media_manager_title")}
+                    </DialogTitle>
                     <DialogDescription>
-                        {" Make changes to your profile here. Click save when you're done."}
+                        {t("common:media_manager_content")}
                     </DialogDescription>
                     <div className="h-full w-full pt-5">
-                        <UploadFilesToVercelForm />
+                        <UploadFilesForm />
                     </div>
                 </DialogHeader>
             </DialogContent>

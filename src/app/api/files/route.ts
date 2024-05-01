@@ -1,7 +1,17 @@
-import { ALLOWED_FILE_TYPES, MAX_FILE_SIZE } from '@/constants/common';
-import { awsS3PresignedUrl, vercelPut } from '@/lib';
+import {
+    ALLOWED_FILE_TYPES,
+    MAX_FILE_SIZE
+} from '@/constants/common';
+import {
+    awsS3PresignedUrl,
+    vercelPut
+} from '@/lib';
 import { auth } from '@/lib/auth-config';
-import { createStorage, listStorages, listStoragesByUserId } from '@/services';
+import {
+    createStorage,
+    listStorages,
+    listStoragesByUserId
+} from '@/services';
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request): Promise<NextResponse> {
@@ -15,7 +25,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     const destination = searchParams.get("destination");
 
     if (!destination) {
-        return NextResponse.json({ error: "The destination is required in the url params" }, { status: 401 })
+        return NextResponse.json({ error: "The destination is required in the url params" }, { status: 400 })
     }
 
     const form = await request.formData();
@@ -38,8 +48,8 @@ export async function POST(request: Request): Promise<NextResponse> {
         let storage;
 
         if (destination === "vercel") {
-            const blog = await vercelPut(file)
-            storage = await createStorage(session?.user?.id, blog);
+            const blob = await vercelPut(file)
+            storage = await createStorage(session?.user?.id, blob);
         }
 
         if (destination === "aws-s3") {
@@ -83,9 +93,10 @@ export async function GET(request: Request) {
         return NextResponse.json({ error: "The params *for* non found in the url" }, { status: 400 })
     }
 
-    let storages;
 
     try {
+
+        let storages;
         if (listFor === "user") {
             storages = await listStoragesByUserId(session.user.id);
         }

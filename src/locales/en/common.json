@@ -20,5 +20,8 @@
     "enter_password_placeholder": "Enter your password",
     "new_location": "Add new location",
     "select_image_btn": "Add an image for this location",
-    "add_media_trigger_btn": "Select a media"
+    "add_media_trigger_btn": "Select a media",
+    "key_cancel": "Cancel",
+    "media_manager_title": "Media manager",
+    "media_manager_content": "Find all your uploaded media or add new here"
 }

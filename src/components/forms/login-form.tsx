@@ -38,7 +38,7 @@ export function LoginForm() {
         console.log({ response })
     }
     return (
-        <Card className="w-full border-0 shadow-none p-0">
+        <Card className="w-full border-0 shadow-none p-0 bg-transparent">
             <CardHeader className="p-0 py-6 mb-5">
                 {/* <CardTitle className="text-2xl">Login</CardTitle> */}
                 <CardDescription>
