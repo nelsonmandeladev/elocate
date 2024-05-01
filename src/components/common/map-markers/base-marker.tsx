@@ -47,8 +47,13 @@ function BaseMarker({ map, position, children, draggable, onDragEnd }: MarkerPro
         if (markerRef.current) {
             markerRef.current.position = position;
             markerRef.current.map = map;
+            markerRef.current.gmpDraggable = draggable;
+            markerRef.current.addListener('dragend', (event: google.maps.MapMouseEvent) => {
+                const position = event.latLng?.toJSON();
+                onDragEnd && onDragEnd(position as google.maps.LatLngLiteral)
+            });
         }
-    }, [map, position, children])
+    }, [map, position, children, draggable, onDragEnd])
 
 
 
