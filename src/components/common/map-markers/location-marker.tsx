@@ -14,7 +14,6 @@ interface LocationMarkerProps {
 
 export function CurrentLocationMarker(props: LocationMarkerProps) {
     const { map, position } = props;
-    const [pending, startTransition] = useTransition();
 
 
     async function handleReverseGeocoding(position: google.maps.LatLngLiteral) {
@@ -22,7 +21,7 @@ export function CurrentLocationMarker(props: LocationMarkerProps) {
             method: "POST",
             body: JSON.stringify(position)
         });
-        const responseData = await response.json();
+        const responseData = await response.json() as google.maps.GeocoderResponse;
         console.log({ responseData })
     }
     function handleDragEnd(position: google.maps.LatLngLiteral) {
@@ -40,7 +39,7 @@ export function CurrentLocationMarker(props: LocationMarkerProps) {
             }}
 
         >
-            <Button size={"icon"} variant={"ghost"} disabled={pending} className='size-[60px]'>
+            <Button size={"icon"} variant={"ghost"} className='size-[60px]'>
                 <MapPin className='text-primary cursor-pointer' size={60} />
             </Button>
 
