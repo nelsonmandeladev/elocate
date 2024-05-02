@@ -23,5 +23,10 @@
     "add_media_trigger_btn": "Select a media",
     "key_cancel": "Cancel",
     "media_manager_title": "Media manager",
-    "media_manager_content": "Find all your uploaded media or add new here"
+    "media_manager_content": "Find all your uploaded media or add new here",
+    "create_location_description": "This is how you can easily add a new location to help people find enrolment places.",
+    "create_location_current_location_title": "Use my current position",
+    "create_location_current_location_content": "Helps us find accurate places around you in order to let you add easily a location",
+    "create_location_choose_location_title": "Select on the map",
+    "create_location_choose_location_content": "Let you easily drag a marker and drop it anywhere to have places information in order to add a location"
 }

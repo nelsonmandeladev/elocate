@@ -23,5 +23,10 @@
     "add_media_trigger_btn": "Selectionner un media",
     "key_cancel": "Annuler",
     "media_manager_title": "Gesttion des médias",
-    "media_manager_content": "Trouvez tous vos médias téléchargés ou ajoutez-en de nouveaux ici"
+    "media_manager_content": "Trouvez tous vos médias téléchargés ou ajoutez-en de nouveaux ici",
+    "create_location_description": "Voici comment vous pouvez facilement ajouter un nouvel emplacement pour aider les gens à trouver les lieux d'inscription.",
+    "create_location_current_location_title": "Utiliser ma position actuelle",
+    "create_location_current_location_content": "Nous aide à trouver des lieux précis autour de vous afin de vous permettre d'ajouter facilement un emplacement",
+    "create_location_choose_location_title": "Sélectionner sur la carte",
+    "create_location_choose_location_content": "Vous permet de faire facilement glisser un marqueur et de le déposer n'importe où pour avoir des informations sur les lieux afin d'ajouter un emplacement"
 }

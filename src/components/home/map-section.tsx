@@ -39,13 +39,11 @@ export function MapSection({ session }: MapSectionProps) {
                 <Drawer open={showFeaturesPanel} onOpenChange={(_open) => setShowFeaturePanel(_open)}>
                     <DrawerContent className='h-[calc(100dvh-30px)] bg-gray-100'>
                         <DrawerHeader className="text-left">
-                            <DrawerTitle>
-                                <h4 className="text-xl text-gray-600 font-semibold">
-                                    {session ? t("common:new_location") : t("common:login_required")}
-                                </h4>
+                            <DrawerTitle className="text-xl text-gray-600 font-semibold">
+                                {session ? t("common:new_location") : t("common:login_required")}
                             </DrawerTitle>
                         </DrawerHeader>
-                        <div className="px-3 mt-8 w-full">
+                        <div className="px-3 mt-1 md:mt-8 w-full">
                             <Show>
                                 <Show.When
                                     isTrue={session?.user ? true : false}
@@ -64,11 +62,15 @@ export function MapSection({ session }: MapSectionProps) {
                             </Show>
                         </div>
                         <DrawerFooter className="pt-2">
-                            <DrawerClose asChild>
-                                <Button className='text-sm text-gray-500' size={"sm"} variant="outline">
-                                    {t("common:key_cancel")}
-                                </Button>
-                            </DrawerClose>
+                            <Button
+                                className='text-sm text-gray-500' size={"sm"} variant="outline"
+                                onClick={() => {
+                                    setShowFeaturePanel(false)
+                                }}
+                            >
+                                {t("common:key_cancel")}
+
+                            </Button>
                         </DrawerFooter>
                     </DrawerContent>
                 </Drawer>
