@@ -43,27 +43,14 @@ export function UploadFiles({ trigger }: UploadFilesProps) {
     if (!isDesktop) {
         return (
             <Drawer open={open} onOpenChange={setOpen}>
-                <DrawerTrigger className="w-full">
-                    <Show>
-                        <Show.When
-                            isTrue={trigger ? true : false}
-                        >
-                            {trigger}
-                        </Show.When>
-                        <Show.When
-                            isTrue={!trigger ? true : false}
-                        >
-                            <Button
-                                className='flex justify-center gap-5 items-center py-8 w-full bg-gray-100 text-gray-600 font-normal'
-                                variant={"outline"}
-                                size={"lg"}
-                            >
-                                <CloudUpload />
-                                {t("common:add_media_trigger_btn")}
-                            </Button>
-                        </Show.When>
-                    </Show>
-                </DrawerTrigger>
+                <Button
+                    className='flex justify-center text-[16px] gap-5 items-center w-full bg-gray-100 text-gray-600 font-normal'
+                    variant={"outline"}
+                    onClick={() => setOpen(true)}
+                >
+                    <CloudUpload size={20} />
+                    {t("common:add_media_trigger_btn")}
+                </Button>
                 <DrawerContent className='h-[calc(100dvh-70px)] bg-gray-100'>
                     <DrawerHeader className="text-left">
                         <DrawerTitle>
@@ -77,11 +64,15 @@ export function UploadFiles({ trigger }: UploadFilesProps) {
                         <UploadFilesForm />
                     </div>
                     <DrawerFooter className="pt-2">
-                        <DrawerClose asChild>
-                            <Button className='text-sm text-gray-500' size={"sm"} variant="outline">
-                                {t("common:key_cancel")}
-                            </Button>
-                        </DrawerClose>
+                        <Button
+                            className='text-sm text-gray-500' size={"sm"} variant="outline"
+                            onClick={() => {
+                                setOpen(false)
+                            }}
+                        >
+                            {t("common:key_cancel")}
+
+                        </Button>
                     </DrawerFooter>
                 </DrawerContent>
             </Drawer>
