@@ -15,39 +15,19 @@ interface LocationMarkerProps {
 
 export function CurrentLocationMarker(props: LocationMarkerProps) {
     const { map, position } = props;
-    const [selectedPosition, setSelectedPosition] = useState<google.maps.LatLngLiteral>();
-
-    const { handelReversCoding } = useReverseCoding();
-    const { loadingReverseCoding } = useMapLocationInteractions();
-
-    async function handleReverseGeocoding(position: google.maps.LatLngLiteral) {
-        setSelectedPosition(position);
-        handelReversCoding(position);
-    }
-
-
-    function handleDragEnd(position: google.maps.LatLngLiteral) {
-        debounce(async () => {
-            handleReverseGeocoding(position)
-        }, 1000)();
-    }
-
 
     return (
         <BaseMarker
-            position={selectedPosition ?? position}
+            position={position}
             map={map}
-            draggable={!loadingReverseCoding}
-            onDragEnd={(position) => {
-                handleDragEnd(position)
-            }}
+        // draggable={!loadingReverseCoding}
+        // onDragEnd={(position) => {
+        //     handleDragEnd(position)
+        // }}
 
         >
             <Button size={"icon"} variant={"ghost"} className='size-[60px] bg-transparent hover:bg-transparent'>
-                {loadingReverseCoding ?
-                    <Spinner /> :
-                    <MapPin className='text-primary cursor-pointer' size={60} />
-                }
+                <MapPin className='text-primary cursor-pointer' size={60} />
             </Button>
 
         </BaseMarker>
