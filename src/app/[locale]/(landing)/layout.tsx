@@ -8,7 +8,7 @@ interface LayoutProps {
 export default async function layout({ children }: LayoutProps) {
     const session = await auth();
     return (
-        <div>
+        <div className='relative'>
             <LandingPageHeader
                 session={session}
             />

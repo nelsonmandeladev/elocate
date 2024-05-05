@@ -8,7 +8,7 @@ interface MarkerProps {
     children: ReactNode;
     position: google.maps.LatLngLiteral,
     draggable?: boolean;
-    onDragEnd: (position: google.maps.LatLngLiteral) => void
+    onDragEnd?: (position: google.maps.LatLngLiteral) => void
 }
 
 
@@ -19,7 +19,7 @@ interface MarkerProps {
  * @param map - The map.
  * @returns A Marker component.
  */
-function BaseMarker({ map, position, children, draggable, onDragEnd }: MarkerProps): ReactNode {
+function BaseMarker({ map, position, children }: MarkerProps): ReactNode {
     const markerRef = useRef<google.maps.marker.AdvancedMarkerElement | null>(null);
     const rootRef = useRef<Root | null>(null);
 
@@ -31,15 +31,15 @@ function BaseMarker({ map, position, children, draggable, onDragEnd }: MarkerPro
             markerRef.current = new google.maps.marker.AdvancedMarkerElement({
                 position,
                 content: container,
-                gmpDraggable: draggable,
+                // gmpDraggable: draggable,
             });
 
-            markerRef.current.addListener('dragend', (event: google.maps.MapMouseEvent) => {
-                const position = event.latLng?.toJSON();
-                onDragEnd && onDragEnd(position as google.maps.LatLngLiteral)
-            });
+            // markerRef.current.addListener('dragend', (event: google.maps.MapMouseEvent) => {
+            //     const position = event.latLng?.toJSON();
+            //     onDragEnd && onDragEnd(position as google.maps.LatLngLiteral)
+            // });
         }
-    }, [draggable, position, onDragEnd])
+    }, [position])
 
 
     const initRootRef = useCallback(() => {
@@ -47,13 +47,13 @@ function BaseMarker({ map, position, children, draggable, onDragEnd }: MarkerPro
         if (markerRef.current) {
             markerRef.current.position = position;
             markerRef.current.map = map;
-            markerRef.current.gmpDraggable = draggable;
-            markerRef.current.addListener('dragend', (event: google.maps.MapMouseEvent) => {
-                const position = event.latLng?.toJSON();
-                onDragEnd && onDragEnd(position as google.maps.LatLngLiteral)
-            });
+            // markerRef.current.gmpDraggable = draggable;
+            // markerRef.current.addListener('dragend', (event: google.maps.MapMouseEvent) => {
+            //     const position = event.latLng?.toJSON();
+            //     onDragEnd && onDragEnd(position as google.maps.LatLngLiteral)
+            // });
         }
-    }, [map, position, children, draggable, onDragEnd])
+    }, [map, position, children])
 
 
 

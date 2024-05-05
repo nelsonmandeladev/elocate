@@ -2,6 +2,7 @@ import {
     useMapLocationInteractions,
     useMapManagementHomeStore
 } from "@/store";
+import { useCallback } from "react";
 
 
 interface ReverseCodingReturnParams {
@@ -14,7 +15,7 @@ export const useReverseCoding = (): ReverseCodingReturnParams => {
     const { setReverseCodingResults, setLoadingReverseCoding } = useMapLocationInteractions();
     const { setShowFeaturePanel } = useMapManagementHomeStore();
 
-    async function handelReversCoding(position: google.maps.LatLngLiteral) {
+    const handelReversCoding = useCallback(async (position: google.maps.LatLngLiteral) => {
         setLoadingReverseCoding();
         const response = await fetch("/api/geocoding", {
             method: "POST",
@@ -26,7 +27,7 @@ export const useReverseCoding = (): ReverseCodingReturnParams => {
         setReverseCodingResults(results);
         setShowFeaturePanel(true);
         setLoadingReverseCoding();
-    }
+    }, [setLoadingReverseCoding, setReverseCodingResults, setShowFeaturePanel])
 
     return {
         handelReversCoding
