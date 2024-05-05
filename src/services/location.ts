@@ -30,3 +30,19 @@ export async function createLocation(location: CreateLocationType, user_id: stri
 
     return createdLocation;
 }
+
+export async function listAllLocation() {
+    const locations = await prisma.location.findMany({
+        select: {
+            ...LOCATION_RETURNABLE_FIELD,
+            user: {
+                select: USER_RETURNABLE_FIELD
+            },
+            image: {
+                select: STORAGE_RETURNABLE_FIELDS
+            }
+        }
+    });
+
+    return locations;
+}

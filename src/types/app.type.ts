@@ -45,3 +45,15 @@ export interface CreateLocationType extends CreateLocationFormType {
     lat: number,
     storage_id: string
 }
+
+export type LocationType = {
+    id: string,
+    formatted_address: string,
+    description: string,
+    lat: number,
+    lng: number,
+    user: UserType,
+    image: StorageType,
+    createdAt: string,
+    updatedAt: string,
+}

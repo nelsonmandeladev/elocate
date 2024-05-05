@@ -35,5 +35,6 @@
     "key_required_field": "This field is required",
     "save_location_btn": "Save location",
     "add_location_success": "You added successfully a new location 🎊",
-    "add_location_failed": "A problem occurred while adding the location 😔, try again later 💪🏿"
+    "add_location_failed": "A problem occurred while adding the location 😔, try again later 💪🏿",
+    "key_get_direction": "Get the direction"
 }

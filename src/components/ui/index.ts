@@ -14,3 +14,4 @@ export * from "./scroll-area";
 export * from "./skeleton";
 export * from "./textarea";
 export * from "./sonner";
+export * from "./popover";
