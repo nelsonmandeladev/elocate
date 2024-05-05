@@ -28,5 +28,12 @@
     "create_location_current_location_title": "Utiliser ma position actuelle",
     "create_location_current_location_content": "Nous aide à trouver des lieux précis autour de vous afin de vous permettre d'ajouter facilement un emplacement",
     "create_location_choose_location_title": "Sélectionner sur la carte",
-    "create_location_choose_location_content": "Vous permet de faire facilement glisser un marqueur et de le déposer n'importe où pour avoir des informations sur les lieux afin d'ajouter un emplacement"
+    "create_location_choose_location_content": "Vous permet de faire facilement glisser un marqueur et de le déposer n'importe où pour avoir des informations sur les lieux afin d'ajouter un emplacement",
+    "listed_address_message": "Voici une liste de quelques lieux que nous avons trouvés autour du lieu de sélection, vous pouvez choisir celui qui correspond le mieux pour continuer",
+    "key_location_field_label": "Adresse complète du lieu",
+    "key_description_field_label": "Informations supplémentaires",
+    "key_required_field": "Ce champ est obligatoire",
+    "save_location_btn": "Enregistrer le lieux",
+    "add_location_success": "Vous avez ajouté avec succès un nouvel emplacement 🎊",
+    "add_location_failed": "Un problème est survenu lors de l'ajout de l'emplacement 😔, réessayez plus tard 💪🏿"
 }

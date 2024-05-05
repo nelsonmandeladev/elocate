@@ -28,5 +28,12 @@
     "create_location_current_location_title": "Use my current position",
     "create_location_current_location_content": "Helps us find accurate places around you in order to let you add easily a location",
     "create_location_choose_location_title": "Select on the map",
-    "create_location_choose_location_content": "Let you easily drag a marker and drop it anywhere to have places information in order to add a location"
+    "create_location_choose_location_content": "Let you easily drag a marker and drop it anywhere to have places information in order to add a location",
+    "listed_address_message": "This is a list of some places we founded around the selection location, you can choose the one that matches best to continue",
+    "key_location_field_label": "Full address of the venue",
+    "key_description_field_label": "Additional information",
+    "key_required_field": "This field is required",
+    "save_location_btn": "Save location",
+    "add_location_success": "You added successfully a new location 🎊",
+    "add_location_failed": "A problem occurred while adding the location 😔, try again later 💪🏿"
 }

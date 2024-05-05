@@ -1,3 +1,4 @@
+import { CreateLocationFormType } from "./zod.type";
 
 export interface UserType {
     id: string;
@@ -37,4 +38,10 @@ export type AwsGetSignedUrlParams = {
     fileType: string
     fileSize: number
     checksum: string
+}
+
+export interface CreateLocationType extends CreateLocationFormType {
+    lng: number,
+    lat: number,
+    storage_id: string
 }

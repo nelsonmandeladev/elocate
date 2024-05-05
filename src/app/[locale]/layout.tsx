@@ -10,6 +10,7 @@ import { TRANSlATIONS_NAMESPACES } from "@/constants";
 import { TranslationProvider } from "@/providers";
 import { dir } from "i18next";
 import i18nConfig from "@/lib/i18nConfig";
+import { Toaster } from "@/components";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -46,6 +47,7 @@ export default async function layout({
                         resources={resources}
                     >
                         {children}
+                        <Toaster />
                     </TranslationProvider>
                 </div>
             </body>

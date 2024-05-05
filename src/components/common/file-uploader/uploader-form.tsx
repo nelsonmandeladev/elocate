@@ -33,7 +33,7 @@ export function UploadFilesForm(props: UploadFilesFormProps) {
 
             if (response.status === 201) {
                 const responseData = await response.json();
-                setStorage(responseData);
+                // setStorage(responseData);
                 setStorages([responseData, ...storages]);
             } else {
                 const error = await response.json();
@@ -125,41 +125,33 @@ export function UploadFilesForm(props: UploadFilesFormProps) {
                         Array.from({ length: 8 }, (_, index) => (
                             <Skeleton key={index} className="h-[75px] md:h-[180px] w-full  rounded bg-gray-400/50" />
                         )) :
-                        null
-                    }
-                    <EachRenderer<StorageType>
-                        of={storages}
-                        render={(item) => (
-                            <div
-                                className={cn("aspect-auto rounded relative cursor-pointer h-[75px] md:min-h-[180px] md:max-h-[180px]")}
-                                onClick={() => {
-                                    setStorage(item);
-                                    onStorageSelected && onStorageSelected(item);
-                                }}
-                            >
-                                <Image
-                                    src={item.url}
-                                    alt={item.pathname}
-                                    width={100}
-                                    height={100}
-                                    className='w-full h-full rounded object-cover'
-                                />
-                                {item.id === storage?.id ?
-                                    <div className="absolute text-white left-1 top-1">
-                                        <CheckCircle className='' size={15} />
-                                    </div> : null
-                                }
-                                <Button
-                                    size={"icon"} variant={"outline"} className="absolute right-1 bottom-1 bg-transparent text-white"
-                                    onClick={(event) => {
-                                        event.stopPropagation();
+                        <EachRenderer<StorageType>
+                            of={storages}
+                            render={(item) => (
+                                <div
+                                    className={cn("aspect-auto rounded relative cursor-pointer h-[75px] md:min-h-[180px] md:max-h-[180px]")}
+                                    onClick={() => {
+                                        setStorage(item);
+                                        onStorageSelected && onStorageSelected(item);
                                     }}
                                 >
-                                    <Eye className='' size={20} />
-                                </Button>
-                            </div>
-                        )}
-                    />
+                                    <Image
+                                        src={item.url}
+                                        alt={item.pathname}
+                                        width={100}
+                                        height={100}
+                                        className='w-full h-full rounded object-cover'
+                                    />
+                                    {item.id === storage?.id ?
+                                        <div className="absolute text-white left-1 top-1">
+                                            <CheckCircle className='' size={15} />
+                                        </div> : null
+                                    }
+                                </div>
+                            )}
+                        />
+                    }
+
                 </div>
             </ScrollArea>
         </Fragment>

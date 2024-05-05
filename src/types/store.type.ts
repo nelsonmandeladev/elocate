@@ -11,5 +11,5 @@ export type MapLocationInteractionsType = {
     setReverseCodingResults: (results: google.maps.GeocoderResult[]) => void;
 
     selectedPlace: google.maps.GeocoderResult | null;
-    setSelectedPlace: (place: google.maps.GeocoderResult) => void;
+    setSelectedPlace: (place: google.maps.GeocoderResult | null) => void;
 }

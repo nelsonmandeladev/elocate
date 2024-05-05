@@ -1,3 +1,4 @@
+import { STORAGE_RETURNABLE_FIELDS, USER_RETURNABLE_FIELD } from "@/constants";
 import prisma from "@/lib/prisma";
 import { createStorageType } from "@/types/app.type";
 
@@ -11,27 +12,7 @@ export async function createStorage(userId: string, file: createStorageType) {
             url: file.url,
             pathname: file.pathname ?? ""
         },
-        select: {
-            contentDisposition: true,
-            contentType: true,
-            createdAt: true,
-            downloadUrl: true,
-            id: true,
-            pathname: true,
-            updatedAt: true,
-            url: true,
-            user: {
-                select: {
-                    id: true,
-                    email: true,
-                    name: true,
-                    image: true,
-                    updatedAt: true,
-                    createdAt: true,
-                },
-
-            }
-        }
+        select: STORAGE_RETURNABLE_FIELDS
     });
 
     return storage
@@ -65,24 +46,9 @@ export async function listStoragesByUserId(userId: string) {
 export async function listStorages() {
     const storages = await prisma.storage.findMany({
         select: {
-            contentDisposition: true,
-            contentType: true,
-            createdAt: true,
-            downloadUrl: true,
-            id: true,
-            pathname: true,
-            updatedAt: true,
-            url: true,
+            ...STORAGE_RETURNABLE_FIELDS,
             user: {
-                select: {
-                    id: true,
-                    email: true,
-                    name: true,
-                    image: true,
-                    updatedAt: true,
-                    createdAt: true,
-                },
-
+                select: USER_RETURNABLE_FIELD
             }
         }
     });
