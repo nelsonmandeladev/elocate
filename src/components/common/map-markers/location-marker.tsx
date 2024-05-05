@@ -36,7 +36,7 @@ export function LocationMarker(props: LocationMarkerProps) {
                 </PopoverTrigger>
                 <PopoverContent className="w-80 h-full rounded p-3" side='top' sideOffset={5}>
                     <div className="flex flex-col gap-3 w-full">
-                        <div className="aspect-auto rounded relative cursor-pointer h-[75px] md:min-h-[180px] md:max-h-[180px] bg-gray-100">
+                        <div className="aspect-auto rounded relative cursor-pointer h-[150px] md:min-h-[180px] md:max-h-[180px] bg-gray-100">
                             <Image
                                 src={location.image.url ?? ""}
                                 alt={location.image.pathname ?? ""}
