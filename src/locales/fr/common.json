@@ -35,5 +35,6 @@
     "key_required_field": "Ce champ est obligatoire",
     "save_location_btn": "Enregistrer le lieux",
     "add_location_success": "Vous avez ajouté avec succès un nouvel emplacement 🎊",
-    "add_location_failed": "Un problème est survenu lors de l'ajout de l'emplacement 😔, réessayez plus tard 💪🏿"
+    "add_location_failed": "Un problème est survenu lors de l'ajout de l'emplacement 😔, réessayez plus tard 💪🏿",
+    "key_get_direction": "Obtenir la direction"
 }

@@ -6,13 +6,17 @@ import { useReverseCoding } from '@/hooks';
 import { debounce } from '@/lib';
 import { Spinner } from '@/components/ui';
 import { useMapLocationInteractions } from '@/store';
+import { LocationMarker } from '../map-markers';
+import { EachRenderer } from '../renderers';
 
 function LocationsMapLoader() {
     const mapRef = useRef<HTMLDivElement | null>(null);
     const [map, setMap] = useState<google.maps.Map | null>(null);
     const [currentLocation, setCurrentLocation] = useState<google.maps.LatLngLiteral>({ lng: 0, lat: 0 });
     const { handelReversCoding } = useReverseCoding();
-    const { loadingReverseCoding } = useMapLocationInteractions();
+    const { loadingReverseCoding, locationsFound } = useMapLocationInteractions();
+
+    console.log(({ locationsFound }));
 
     const handleInitMap = useCallback(() => {
         if (mapRef.current) {
@@ -74,12 +78,22 @@ function LocationsMapLoader() {
                     /> : null
                 }
             </div>
-
-            {/* <CurrentLocationMarker
-                map={map}
-                position={currentLocation}
-
-            /> */}
+            <h1 className="">
+                {locationsFound.length}
+            </h1>
+            {<EachRenderer
+                of={locationsFound}
+                render={(location) => (
+                    <LocationMarker
+                        map={map}
+                        position={{
+                            lat: location.lat,
+                            lng: location.lng
+                        }}
+                        location={location}
+                    />
+                )}
+            />}
         </>
     )
 }

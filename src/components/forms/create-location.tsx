@@ -20,7 +20,7 @@ import {
     useMapLocationInteractions,
     useMapManagementHomeStore
 } from '@/store';
-import { useMediaQuery } from '@/hooks';
+import { useLocations, useMediaQuery } from '@/hooks';
 import { cn } from '@/lib';
 import { CreateLocationType, StorageType } from '@/types/app.type';
 import { useForm } from 'react-hook-form';
@@ -152,6 +152,9 @@ interface FormElementProps {
 function FormElement({ selectedPlace, placeImage }: FormElementProps) {
     const { t } = useTranslation();
     const [isPending, startTransition] = useTransition();
+    const { setSelectedPlace } = useMapLocationInteractions();
+    const { setShowFeaturePanel } = useMapManagementHomeStore();
+    const { listAllLocations } = useLocations();
     const form = useForm<CreateLocationFormType>({
 
         resolver: zodResolver(createLocationSchema),
@@ -176,9 +179,13 @@ function FormElement({ selectedPlace, placeImage }: FormElementProps) {
                 method: "POST",
                 body: JSON.stringify(request_data)
             })
-            const response_data = await response.json();
+            await response.json();
+
             if (response.status === 201) {
-                toast.success(t("common:add_location_success"), { duration: 10000 })
+                toast.success(t("common:add_location_success"), { duration: 10000 });
+                listAllLocations();
+                setSelectedPlace(null);
+                setShowFeaturePanel(false);
             } else {
                 toast.error(t("common:add_location_success"), { duration: 10000 })
             }
@@ -226,7 +233,7 @@ function FormElement({ selectedPlace, placeImage }: FormElementProps) {
                         </FormItem>
                     )}
                 />
-                <Button type="submit" className="w-full">
+                <Button type="submit" className="w-full" disabled={isPending}>
                     {t("common:save_location_btn")}
                 </Button>
             </form>

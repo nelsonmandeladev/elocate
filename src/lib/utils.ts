@@ -32,3 +32,18 @@ export const computeSHA256 = async (file: File) => {
 export const generateFileName = (bytes = 32) => crypto.randomBytes(bytes).toString("hex")
 
 
+export function truncateText(text: string, length: number, ending = '...'): string {
+  if (text.length <= length) {
+    return text;
+  }
+
+  // Consider word boundary if desired
+  if (length > ending.length) {
+    const slicedText = text.substring(0, length - ending.length);
+    const lastSpaceIndex = slicedText.lastIndexOf(' ');
+    return lastSpaceIndex !== -1 ? slicedText.substring(0, lastSpaceIndex) + ending : slicedText + ending;
+  }
+
+  // If length is too short, just truncate without ellipsis
+  return text.substring(0, length);
+}

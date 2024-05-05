@@ -1,5 +1,5 @@
 import { auth } from "@/lib/auth-config";
-import { createLocation } from "@/services";
+import { createLocation, listAllLocation } from "@/services";
 import { CreateLocationType } from "@/types/app.type";
 import { NextResponse } from "next/server";
 
@@ -24,4 +24,14 @@ export async function POST(request: Request): Promise<NextResponse> {
         return NextResponse.json({ error: "Un probleme est survenu lors de creation de la create de la localisation" }, { status: 500 })
     }
 
+}
+
+
+export async function GET(request: Request): Promise<NextResponse> {
+    try {
+        const locations = await listAllLocation();
+        return NextResponse.json(locations, { status: 200 })
+    } catch (error) {
+        return NextResponse.json({ error: "Un probleme est survenu lors du chargement des localisations" }, { status: 500 })
+    }
 }
