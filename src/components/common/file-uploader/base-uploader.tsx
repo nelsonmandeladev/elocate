@@ -13,13 +13,11 @@ import {
     DialogTitle,
     DialogTrigger,
     Drawer,
-    DrawerClose,
     DrawerContent,
     DrawerDescription,
     DrawerFooter,
     DrawerHeader,
     DrawerTitle,
-    DrawerTrigger,
     Button,
     UploadFilesForm
 } from "@/components"
@@ -28,29 +26,45 @@ import { Show } from "../renderers";
 import { useMediaQuery } from "@/hooks";
 import { CloudUpload } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { StorageType } from "@/types/app.type";
+import Image from "next/image";
 
 interface UploadFilesProps {
-    trigger?: ReactNode
+    onFileSelected?: (file: StorageType) => void,
 }
 
-export function UploadFiles({ trigger }: UploadFilesProps) {
+export function UploadFiles({ onFileSelected }: UploadFilesProps) {
 
     const [open, setOpen] = useState<boolean>(false);
     const isDesktop = useMediaQuery("(min-width: 768px)");
     const { t } = useTranslation();
+    const [selectedStorage, setSelectedStorage] = useState<StorageType | null>(null)
 
 
     if (!isDesktop) {
         return (
             <Drawer open={open} onOpenChange={setOpen}>
-                <Button
-                    className='flex justify-center text-[16px] gap-5 items-center w-full bg-gray-100 text-gray-600 font-normal'
-                    variant={"outline"}
-                    onClick={() => setOpen(true)}
-                >
-                    <CloudUpload size={20} />
-                    {t("common:add_media_trigger_btn")}
-                </Button>
+                <div className="flex gap-2">
+                    <Button
+                        className='flex justify-center text-[16px] gap-5 items-center w-full bg-gray-100 text-gray-600 font-normal'
+                        variant={"outline"}
+                        onClick={() => setOpen(true)}
+                    >
+                        <CloudUpload size={20} />
+                        {t("common:add_media_trigger_btn")}
+                    </Button>
+                    {selectedStorage ?
+                        <div className="aspect-auto rounded min-h-[50px] max-h-[50px]: min-w-[50px] max-w-[50px] bg-gray-300">
+                            <Image
+                                src={selectedStorage?.url ?? ""}
+                                alt={selectedStorage?.pathname ?? ""}
+                                width={50}
+                                height={50}
+                                className='w-full h-full rounded object-cover'
+                            />
+                        </div> : null
+                    }
+                </div>
                 <DrawerContent className='h-[calc(100dvh-70px)] bg-gray-100'>
                     <DrawerHeader className="text-left">
                         <DrawerTitle>
@@ -61,7 +75,13 @@ export function UploadFiles({ trigger }: UploadFilesProps) {
                         </DrawerDescription>
                     </DrawerHeader>
                     <div className="px-4 mt-4">
-                        <UploadFilesForm />
+                        <UploadFilesForm
+                            onStorageSelected={(file) => {
+                                onFileSelected && onFileSelected(file);
+                                setSelectedStorage(file);
+                                setOpen(false)
+                            }}
+                        />
                     </div>
                     <DrawerFooter className="pt-2">
                         <Button
@@ -80,28 +100,28 @@ export function UploadFiles({ trigger }: UploadFilesProps) {
     }
 
     return (
-        <Dialog>
-            <DialogTrigger className="w-full">
-                <Show>
-                    <Show.When
-                        isTrue={trigger ? true : false}
-                    >
-                        {trigger}
-                    </Show.When>
-                    <Show.When
-                        isTrue={!trigger ? true : false}
-                    >
-                        <Button
-                            className='flex justify-center gap-5 items-center py-8 w-full bg-gray-100 text-gray-600 font-normal'
-                            variant={"outline"}
-                            size={"lg"}
-                        >
-                            <CloudUpload />
-                            {t("common:add_media_trigger_btn")}
-                        </Button>
-                    </Show.When>
-                </Show>
-            </DialogTrigger>
+        <Dialog open={open} onOpenChange={setOpen}>
+            <div className="flex gap-2">
+                <Button
+                    className='flex justify-center text-[16px] gap-5 items-center w-full bg-gray-100 text-gray-600 font-normal py-10'
+                    variant={"outline"}
+                    onClick={() => setOpen(true)}
+                >
+                    <CloudUpload size={20} />
+                    {t("common:add_media_trigger_btn")}
+                </Button>
+                {selectedStorage ?
+                    <div className="aspect-auto rounded md:min-h-[150px] md:max-h-[150px] md:min-w-[150px] md:max-w-[150px] bg-gray-300">
+                        <Image
+                            src={selectedStorage?.url ?? ""}
+                            alt={selectedStorage?.pathname ?? ""}
+                            width={150}
+                            height={150}
+                            className='w-full h-full rounded object-cover'
+                        />
+                    </div> : null
+                }
+            </div>
             <DialogContent className="sm:max-w-[425px] min-w-[800px] min-h-[600px] bg-gray-100">
                 <DialogHeader>
                     <DialogTitle>
@@ -111,7 +131,13 @@ export function UploadFiles({ trigger }: UploadFilesProps) {
                         {t("common:media_manager_content")}
                     </DialogDescription>
                     <div className="h-full w-full pt-5">
-                        <UploadFilesForm />
+                        <UploadFilesForm
+                            onStorageSelected={(file) => {
+                                onFileSelected && onFileSelected(file);
+                                setSelectedStorage(file);
+                                setOpen(false);
+                            }}
+                        />
                     </div>
                 </DialogHeader>
             </DialogContent>

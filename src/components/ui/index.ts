@@ -12,3 +12,5 @@ export * from "./drawer";
 export * from "./spinner";
 export * from "./scroll-area";
 export * from "./skeleton";
+export * from "./textarea";
+export * from "./sonner";

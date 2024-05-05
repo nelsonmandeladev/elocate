@@ -33,6 +33,7 @@ function LocationsMapLoader() {
                 const position = draggableMarker.position as google.maps.LatLngLiteral;
                 debounce(() => {
                     handelReversCoding(position);
+                    setCurrentLocation(position)
                 }, 1000)()
 
             })
