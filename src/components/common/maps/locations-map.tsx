@@ -11,14 +11,16 @@ import { EachRenderer } from '../renderers';
 import { LocationType } from '@/types/app.type';
 import { ExpandLocationsListZone } from './area-extender';
 
-function LocationsMapLoader() {
+
+interface LocationsMapLoaderProps {
+    locations: LocationType[],
+    currentLocation: google.maps.LatLngLiteral
+}
+function LocationsMapLoader({ locations, currentLocation }: LocationsMapLoaderProps) {
     const mapRef = useRef<HTMLDivElement | null>(null);
     const [map, setMap] = useState<google.maps.Map | null>(null);
-    const [currentLocation, setCurrentLocation] = useState<google.maps.LatLngLiteral>({ lng: 0, lat: 0 });
-    const { handelReversCoding } = useReverseCoding();
-    const { loadingReverseCoding, locationsFound, maxDistance } = useMapLocationInteractions();
 
-    const { listAllLocations } = useLocations();
+    const { handelReversCoding } = useReverseCoding();
 
     const handleInitMap = useCallback(() => {
         if (mapRef.current) {
@@ -39,8 +41,7 @@ function LocationsMapLoader() {
                 const position = draggableMarker.position as google.maps.LatLngLiteral;
                 debounce(() => {
                     handelReversCoding(position);
-                    setCurrentLocation(position)
-                }, 1000)()
+                }, 1000)();
 
             })
             setMap(map);
@@ -48,28 +49,11 @@ function LocationsMapLoader() {
     }, [currentLocation, handelReversCoding]);
 
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            setCurrentLocation({
-                lng: position.coords.longitude,
-                lat: position.coords.latitude
-            })
-        });
-    }, []);
-
-    useEffect(() => {
         if (currentLocation) {
             handleInitMap();
         }
     }, [currentLocation, handleInitMap]);
 
-    useEffect(() => {
-        listAllLocations(currentLocation, maxDistance);
-    }, [listAllLocations, currentLocation, maxDistance]);
-
-
-    useEffect(() => {
-
-    }, [locationsFound]);
 
     return (
         <>
@@ -82,6 +66,51 @@ function LocationsMapLoader() {
                 }}
                 className='relative flex justify-center'
             />
+            <EachRenderer<LocationType>
+                of={locations}
+                render={(location) => (
+                    <LocationMarker
+                        map={map}
+                        position={{
+                            lat: location.lat,
+                            lng: location.lng
+                        }}
+                        location={location}
+                    />
+                )}
+            />
+        </>
+    )
+}
+
+
+export function LocationsMap() {
+
+    const [currentLocation, setCurrentLocation] = useState<google.maps.LatLngLiteral>({ lng: 0, lat: 0 });
+    const { listAllLocations } = useLocations();
+    const { locationsFound, maxDistance, loadingReverseCoding } = useMapLocationInteractions();
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            setCurrentLocation({
+                lng: position.coords.longitude,
+                lat: position.coords.latitude
+            })
+        });
+    }, []);
+
+
+    useEffect(() => {
+        listAllLocations(currentLocation, maxDistance);
+    }, [listAllLocations, currentLocation, maxDistance]);
+
+
+    return (
+        <BaseMap>
+            <LocationsMapLoader
+                locations={locationsFound}
+                currentLocation={currentLocation}
+            />
             {loadingReverseCoding ?
                 <div className="absolute right-[50%] bottom-10">
                     <Spinner
@@ -93,29 +122,6 @@ function LocationsMapLoader() {
             <div className="absolute bottom-10 w-full flex justify-center px-2.5">
                 <ExpandLocationsListZone />
             </div>
-
-            {locationsFound.length > 0 ? <EachRenderer<LocationType>
-                of={locationsFound}
-                render={(location) => (
-                    <LocationMarker
-                        map={map}
-                        position={{
-                            lat: location.lat,
-                            lng: location.lng
-                        }}
-                        location={location}
-                    />
-                )}
-            /> : null}
-        </>
-    )
-}
-
-
-export function LocationsMap() {
-    return (
-        <BaseMap>
-            <LocationsMapLoader />
         </BaseMap>
     )
 }
