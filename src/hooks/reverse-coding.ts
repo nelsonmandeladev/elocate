@@ -12,7 +12,11 @@ interface ReverseCodingReturnParams {
 
 export const useReverseCoding = (): ReverseCodingReturnParams => {
 
-    const { setReverseCodingResults, setLoadingReverseCoding, setSelectedPlace } = useMapLocationInteractions();
+    const {
+        setReverseCodingResults,
+        setLoadingReverseCoding,
+        setSelectedPlace
+    } = useMapLocationInteractions();
     const { setShowFeaturePanel } = useMapManagementHomeStore();
 
     const handelReversCoding = useCallback(async (position: google.maps.LatLngLiteral) => {
@@ -28,7 +32,12 @@ export const useReverseCoding = (): ReverseCodingReturnParams => {
         setSelectedPlace(null);
         setShowFeaturePanel(true);
         setLoadingReverseCoding();
-    }, [setLoadingReverseCoding, setReverseCodingResults, setShowFeaturePanel, setSelectedPlace])
+    }, [
+        setLoadingReverseCoding,
+        setReverseCodingResults,
+        setShowFeaturePanel,
+        setSelectedPlace
+    ])
 
     return {
         handelReversCoding

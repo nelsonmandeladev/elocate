@@ -91,10 +91,11 @@ export function LandingPageHeader({ session }: LandingPageHeaderProps) {
                                 <DropdownMenuContent align="end" className='w-52'>
                                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                                     <DropdownMenuSeparator />
-                                    <DropdownMenuItem>Settings</DropdownMenuItem>
-                                    <DropdownMenuItem>Support</DropdownMenuItem>
+                                    <DropdownMenuItem className='text-[16px] text-gray-500 font-medium'>Settings</DropdownMenuItem>
+                                    <DropdownMenuItem className='text-[16px] text-gray-500 font-medium'>Support</DropdownMenuItem>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem
+                                        className='hover:bg-red-300'
                                         onClick={handleLogOut}
                                     >Logout</DropdownMenuItem>
                                 </DropdownMenuContent>

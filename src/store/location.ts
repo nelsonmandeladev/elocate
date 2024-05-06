@@ -1,5 +1,4 @@
 import { MapLocationInteractionsType } from "@/types";
-import { LocationType } from "@aws-sdk/client-s3";
 import { create } from "zustand";
 
 export const useMapLocationInteractions = create<MapLocationInteractionsType>((set) => ({

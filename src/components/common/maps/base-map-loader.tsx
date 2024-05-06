@@ -25,10 +25,12 @@ interface BaseMapProps {
 const render = (status: Status) => {
     switch (status) {
         case Status.LOADING:
-            return <div className="h-full w-full flex justify-center items-center">Loading...</div>
+            return <div className="h-full w-full flex justify-center items-center text-lg font-semibold text-gray-600">
+                Loading the map...
+            </div>
         case Status.FAILURE:
-            return <div className='w-full h-full flex justify-center items-center'>
-                Failed to load the map
+            return <div className='w-full h-full flex justify-center items-center text-lg font-semibold text-gray-600'>
+                Failed to load the map 🗺️
             </div>;
         case Status.SUCCESS:
             return <div className='w-full h-full flex justify-center items-center'>Success</div>;
