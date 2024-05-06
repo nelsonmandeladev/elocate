@@ -20,7 +20,9 @@ import { X } from 'lucide-react';
 import { LoginForm } from '../forms';
 import { useTranslation } from 'react-i18next';
 import CreateLocationForm from '../forms/create-location';
-import { useLocations, useMediaQuery } from '@/hooks';
+import {
+    useMediaQuery
+} from '@/hooks';
 
 
 interface MapSectionProps {
@@ -30,12 +32,6 @@ export function MapSection({ session }: MapSectionProps) {
     const { showFeaturesPanel, setShowFeaturePanel } = useMapManagementHomeStore();
     const { t } = useTranslation();
     const isDesktop = useMediaQuery("(min-width: 768px)");
-    const { listAllLocations } = useLocations();
-
-    useEffect(() => {
-        listAllLocations();
-    }, [listAllLocations])
-
 
     if (!isDesktop) {
         return (

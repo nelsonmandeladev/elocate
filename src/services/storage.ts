@@ -23,16 +23,7 @@ export async function listStoragesByUserId(userId: string) {
         where: {
             userId: userId
         },
-        select: {
-            contentDisposition: true,
-            contentType: true,
-            createdAt: true,
-            downloadUrl: true,
-            id: true,
-            pathname: true,
-            updatedAt: true,
-            url: true,
-        },
+        select: STORAGE_RETURNABLE_FIELDS,
         orderBy: {
             createdAt: "desc"
         }

@@ -2,12 +2,13 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { BaseMap } from './base-map-loader';
-import { useReverseCoding } from '@/hooks';
+import { useLocations, useReverseCoding } from '@/hooks';
 import { debounce } from '@/lib';
 import { Spinner } from '@/components/ui';
 import { useMapLocationInteractions } from '@/store';
 import { LocationMarker } from '../map-markers';
 import { EachRenderer } from '../renderers';
+import { LocationType } from '@/types/app.type';
 
 function LocationsMapLoader() {
     const mapRef = useRef<HTMLDivElement | null>(null);
@@ -16,7 +17,7 @@ function LocationsMapLoader() {
     const { handelReversCoding } = useReverseCoding();
     const { loadingReverseCoding, locationsFound } = useMapLocationInteractions();
 
-    console.log(({ locationsFound }));
+    const { listAllLocations } = useLocations();
 
     const handleInitMap = useCallback(() => {
         if (mapRef.current) {
@@ -58,7 +59,11 @@ function LocationsMapLoader() {
         if (currentLocation) {
             handleInitMap();
         }
-    }, [currentLocation, handleInitMap])
+    }, [currentLocation, handleInitMap]);
+
+    useEffect(() => {
+        listAllLocations();
+    }, [listAllLocations])
 
     return (
         <>
@@ -81,7 +86,7 @@ function LocationsMapLoader() {
             <h1 className="">
                 {locationsFound.length}
             </h1>
-            {<EachRenderer
+            {<EachRenderer<LocationType>
                 of={locationsFound}
                 render={(location) => (
                     <LocationMarker
