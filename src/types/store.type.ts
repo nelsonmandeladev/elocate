@@ -15,6 +15,9 @@ export type MapLocationInteractionsType = {
     selectedPlace: google.maps.GeocoderResult | null;
     setSelectedPlace: (place: google.maps.GeocoderResult | null) => void;
 
-    locationsFound: LocationType[],
-    setLocationFound: (locations: LocationType[]) => void,
+    locationsFound: LocationType[];
+    setLocationFound: (locations: LocationType[]) => void;
+
+    maxDistance: number;
+    setMaxDistance: (distance: number) => void;
 }
