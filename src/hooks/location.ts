@@ -4,8 +4,8 @@ import { useCallback } from "react";
 export function useLocations() {
     const { setLocationFound } = useMapLocationInteractions();
 
-    const listAllLocations = useCallback(async () => {
-        const response = await fetch("/api/locations", {
+    const listAllLocations = useCallback(async (position: google.maps.LatLngLiteral, distance: number) => {
+        const response = await fetch(`/api/locations?lat=${position.lat}&lng=${position.lng}&distance=${distance}`, {
             method: "GET"
         });
 

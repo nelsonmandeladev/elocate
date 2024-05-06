@@ -183,7 +183,6 @@ function FormElement({ selectedPlace, placeImage }: FormElementProps) {
 
             if (response.status === 201) {
                 toast.success(t("common:add_location_success"), { duration: 10000 });
-                listAllLocations();
                 setSelectedPlace(null);
                 setShowFeaturePanel(false);
             } else {

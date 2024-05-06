@@ -15,3 +15,4 @@ export * from "./skeleton";
 export * from "./textarea";
 export * from "./sonner";
 export * from "./popover";
+export * from "./slider";

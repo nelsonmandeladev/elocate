@@ -1,6 +1,6 @@
 "use client";
 
-import { Spinner } from '@/components';
+import { RadialAnimation, Spinner } from '@/components';
 import React from 'react'
 
 export default function Loading() {
@@ -9,6 +9,7 @@ export default function Loading() {
             <Spinner
                 size={"large"}
             />
+            {/* <RadialAnimation /> */}
         </div>
     )
 }

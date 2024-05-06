@@ -28,8 +28,13 @@ export async function POST(request: Request): Promise<NextResponse> {
 
 
 export async function GET(request: Request): Promise<NextResponse> {
+    const { searchParams } = new URL(request.url);
+    const lat = Number(searchParams.get("lat"));
+    const lng = Number(searchParams.get("lng"));
+    const distance = Number(searchParams.get("distance"));
+
     try {
-        const locations = await listAllLocation();
+        const locations = await listAllLocation(lat, lng, distance);
         return NextResponse.json(locations, { status: 200 })
     } catch (error) {
         return NextResponse.json({ error: "Un probleme est survenu lors du chargement des localisations" }, { status: 500 })

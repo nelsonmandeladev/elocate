@@ -9,13 +9,14 @@ import { useMapLocationInteractions } from '@/store';
 import { LocationMarker } from '../map-markers';
 import { EachRenderer } from '../renderers';
 import { LocationType } from '@/types/app.type';
+import { ExpandLocationsListZone } from './area-extender';
 
 function LocationsMapLoader() {
     const mapRef = useRef<HTMLDivElement | null>(null);
     const [map, setMap] = useState<google.maps.Map | null>(null);
     const [currentLocation, setCurrentLocation] = useState<google.maps.LatLngLiteral>({ lng: 0, lat: 0 });
     const { handelReversCoding } = useReverseCoding();
-    const { loadingReverseCoding, locationsFound } = useMapLocationInteractions();
+    const { loadingReverseCoding, locationsFound, maxDistance } = useMapLocationInteractions();
 
     const { listAllLocations } = useLocations();
 
@@ -62,8 +63,13 @@ function LocationsMapLoader() {
     }, [currentLocation, handleInitMap]);
 
     useEffect(() => {
-        listAllLocations();
-    }, [listAllLocations])
+        listAllLocations(currentLocation, maxDistance);
+    }, [listAllLocations, currentLocation, maxDistance]);
+
+
+    useEffect(() => {
+
+    }, [locationsFound]);
 
     return (
         <>
@@ -74,19 +80,21 @@ function LocationsMapLoader() {
                     height: "100%",
                     borderRadius: "10px",
                 }}
-                className='relative'
+                className='relative flex justify-center'
             />
-            <div className="absolute right-[50%] bottom-10">
-                {loadingReverseCoding ?
+            {loadingReverseCoding ?
+                <div className="absolute right-[50%] bottom-10">
                     <Spinner
                         size={"large"}
-                    /> : null
-                }
+                    />
+                </div>
+                : null
+            }
+            <div className="absolute bottom-10 w-full flex justify-center px-2.5">
+                <ExpandLocationsListZone />
             </div>
-            <h1 className="">
-                {locationsFound.length}
-            </h1>
-            {<EachRenderer<LocationType>
+
+            {locationsFound.length > 0 ? <EachRenderer<LocationType>
                 of={locationsFound}
                 render={(location) => (
                     <LocationMarker
@@ -98,7 +106,7 @@ function LocationsMapLoader() {
                         location={location}
                     />
                 )}
-            />}
+            /> : null}
         </>
     )
 }
