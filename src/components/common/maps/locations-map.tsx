@@ -10,6 +10,7 @@ import { LocationMarker } from '../map-markers';
 import { EachRenderer } from '../renderers';
 import { LocationType } from '@/types/app.type';
 import { ExpandLocationsListZone } from './area-extender';
+import { RadialAnimation } from '../animation';
 
 
 interface LocationsMapLoaderProps {
@@ -21,6 +22,7 @@ function LocationsMapLoader({ locations, currentLocation }: LocationsMapLoaderPr
     const [map, setMap] = useState<google.maps.Map | null>(null);
 
     const { handelReversCoding } = useReverseCoding();
+    const { loadingLocations, loadingReverseCoding } = useMapLocationInteractions();
 
     const handleInitMap = useCallback(() => {
         if (mapRef.current) {
@@ -66,19 +68,34 @@ function LocationsMapLoader({ locations, currentLocation }: LocationsMapLoaderPr
                 }}
                 className='relative flex justify-center'
             />
-            <EachRenderer<LocationType>
-                of={locations}
-                render={(location) => (
-                    <LocationMarker
-                        map={map}
-                        position={{
-                            lat: location.lat,
-                            lng: location.lng
-                        }}
-                        location={location}
+            {loadingReverseCoding ?
+                <div className="absolute right-[50%] bottom-10">
+                    <Spinner
+                        size={"large"}
                     />
-                )}
-            />
+                </div>
+                : null
+            }
+            {loadingLocations ?
+                <div className="absolute h-full w-full flex justify-center items-center">
+                    <RadialAnimation />
+                </div> :
+                <EachRenderer<LocationType>
+                    of={locations}
+                    render={(location, index) => location && (
+                        <LocationMarker
+                            key={`location-${index}`}
+                            map={loadingLocations ? null : map}
+                            position={{
+                                lat: location.lat,
+                                lng: location.lng
+                            }}
+                            location={location}
+                        />
+                    )}
+                />
+            }
+            {loadingLocations ? "loading" : "not loading"}
         </>
     )
 }
@@ -88,7 +105,7 @@ export function LocationsMap() {
 
     const [currentLocation, setCurrentLocation] = useState<google.maps.LatLngLiteral>({ lng: 0, lat: 0 });
     const { listAllLocations } = useLocations();
-    const { locationsFound, maxDistance, loadingReverseCoding } = useMapLocationInteractions();
+    const { locationsFound, maxDistance } = useMapLocationInteractions();
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -111,14 +128,6 @@ export function LocationsMap() {
                 locations={locationsFound}
                 currentLocation={currentLocation}
             />
-            {loadingReverseCoding ?
-                <div className="absolute right-[50%] bottom-10">
-                    <Spinner
-                        size={"large"}
-                    />
-                </div>
-                : null
-            }
             <div className="absolute bottom-10 w-full flex justify-center px-2.5">
                 <ExpandLocationsListZone />
             </div>

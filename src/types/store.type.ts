@@ -18,6 +18,9 @@ export type MapLocationInteractionsType = {
     locationsFound: LocationType[];
     setLocationFound: (locations: LocationType[]) => void;
 
+    loadingLocations: boolean;
+    setLoadingLocations: () => void;
+
     maxDistance: number;
     setMaxDistance: (distance: number) => void;
 }
