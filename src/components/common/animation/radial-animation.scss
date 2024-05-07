@@ -1,24 +1,12 @@
-.container {
-    position: relative;
-    display: block;
-    width: 80px;
-    margin: 60px auto;
-
-    .delay4 {
-        animation: waves 3s forwards infinite;
-    }
+.delay4 {
+    animation: waves 3s forwards infinite;
 }
 
-
 .circle {
-    display: block;
     height: 120px;
     width: 120px;
     border-radius: 50%;
     background: #1c4ed8;
-    margin: 10px;
-    position: absolute;
-    top: 0px;
 }
 
 @keyframes waves {
