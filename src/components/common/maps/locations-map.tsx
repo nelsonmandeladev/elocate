@@ -76,26 +76,20 @@ function LocationsMapLoader({ locations, currentLocation }: LocationsMapLoaderPr
                 </div>
                 : null
             }
-            {loadingLocations ?
-                <div className="absolute h-full w-full flex justify-center items-center">
-                    <RadialAnimation />
-                </div> :
-                <EachRenderer<LocationType>
-                    of={locations}
-                    render={(location, index) => location && (
-                        <LocationMarker
-                            key={`location-${index}`}
-                            map={loadingLocations ? null : map}
-                            position={{
-                                lat: location.lat,
-                                lng: location.lng
-                            }}
-                            location={location}
-                        />
-                    )}
-                />
-            }
-            {loadingLocations ? "loading" : "not loading"}
+            <EachRenderer<LocationType>
+                of={locations}
+                render={(location, index) => location && (
+                    <LocationMarker
+                        key={`location-${index}`}
+                        map={loadingLocations ? null : map}
+                        position={{
+                            lat: location.lat,
+                            lng: location.lng
+                        }}
+                        location={location}
+                    />
+                )}
+            />
         </>
     )
 }
