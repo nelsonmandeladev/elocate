@@ -31,13 +31,8 @@ function BaseMarker({ map, position, children }: MarkerProps): ReactNode {
             markerRef.current = new google.maps.marker.AdvancedMarkerElement({
                 position,
                 content: container,
-                // gmpDraggable: draggable,
             });
-
-            // markerRef.current.addListener('dragend', (event: google.maps.MapMouseEvent) => {
-            //     const position = event.latLng?.toJSON();
-            //     onDragEnd && onDragEnd(position as google.maps.LatLngLiteral)
-            // });
+            markerRef.current.remove()
         }
     }, [position])
 
@@ -47,11 +42,7 @@ function BaseMarker({ map, position, children }: MarkerProps): ReactNode {
         if (markerRef.current) {
             markerRef.current.position = position;
             markerRef.current.map = map;
-            // markerRef.current.gmpDraggable = draggable;
-            // markerRef.current.addListener('dragend', (event: google.maps.MapMouseEvent) => {
-            //     const position = event.latLng?.toJSON();
-            //     onDragEnd && onDragEnd(position as google.maps.LatLngLiteral)
-            // });
+            markerRef.current.remove();
         }
     }, [map, position, children])
 
