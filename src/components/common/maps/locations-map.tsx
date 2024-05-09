@@ -20,11 +20,13 @@ interface LocationsMapLoaderProps {
 function LocationsMapLoader({ locations, currentLocation }: LocationsMapLoaderProps) {
     const mapRef = useRef<HTMLDivElement | null>(null);
     const [map, setMap] = useState<google.maps.Map | null>(null);
+    const [loadingInitMap, setLoadingInitMap] = useState<boolean>(false);
 
     const { handelReversCoding } = useReverseCoding();
     const { loadingLocations, loadingReverseCoding } = useMapLocationInteractions();
 
     const handleInitMap = useCallback(() => {
+        setLoadingInitMap(true);
         if (mapRef.current) {
             const map = new google.maps.Map(mapRef.current, {
                 center: currentLocation,
@@ -34,10 +36,15 @@ function LocationsMapLoader({ locations, currentLocation }: LocationsMapLoaderPr
                 mapId: "8d26521b58a10775",
 
             });
+
             const draggableMarker = new google.maps.marker.AdvancedMarkerElement({
                 map,
                 position: currentLocation,
                 gmpDraggable: true,
+            })
+
+            map.addListener("tilesloaded", () => {
+                setLoadingInitMap(false)
             })
             draggableMarker.addListener("dragend", (event: google.maps.MapMouseEvent) => {
                 const position = draggableMarker.position as google.maps.LatLngLiteral;
@@ -76,20 +83,22 @@ function LocationsMapLoader({ locations, currentLocation }: LocationsMapLoaderPr
                 </div>
                 : null
             }
-            <EachRenderer<LocationType>
-                of={locations}
-                render={(location, index) => location && (
-                    <LocationMarker
-                        key={`location-${index}`}
-                        map={loadingLocations ? null : map}
-                        position={{
-                            lat: location.lat,
-                            lng: location.lng
-                        }}
-                        location={location}
-                    />
-                )}
-            />
+            {!loadingInitMap ?
+                <EachRenderer<LocationType>
+                    of={locations}
+                    render={(location, index) => (
+                        <LocationMarker
+                            key={`location-${index}`}
+                            map={map}
+                            position={{
+                                lat: location.lat,
+                                lng: location.lng
+                            }}
+                            location={location}
+                        />
+                    )}
+                /> : null
+            }
         </>
     )
 }

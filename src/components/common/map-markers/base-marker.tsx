@@ -32,7 +32,7 @@ function BaseMarker({ map, position, children }: MarkerProps): ReactNode {
                 position,
                 content: container,
             });
-            markerRef.current.remove()
+            markerRef.current.map = null
         }
     }, [position])
 
@@ -42,7 +42,6 @@ function BaseMarker({ map, position, children }: MarkerProps): ReactNode {
         if (markerRef.current) {
             markerRef.current.position = position;
             markerRef.current.map = map;
-            markerRef.current.remove();
         }
     }, [map, position, children])
 
