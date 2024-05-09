@@ -55,7 +55,7 @@ function LocationsMapLoader({ locations, currentLocation }: LocationsMapLoaderPr
             })
             setMap(map);
         }
-    }, [currentLocation, handelReversCoding]);
+    }, [currentLocation, handelReversCoding, loadingLocations, locations]);
 
     useEffect(() => {
         if (currentLocation) {
