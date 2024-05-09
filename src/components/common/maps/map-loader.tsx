@@ -37,17 +37,20 @@ export function LocationsMapLoader() {
 
 
     return (
-        <div className='relative' style={{ height: "100%", width: "100%" }}>
-            <APIProvider apiKey={"AIzaSyCWlp-Raz_hqojhGljCT8R2MU4kIgJGuAc"}>
+        <div className='relative rounded' style={{ height: "100%", width: "100%", borderRadius: "10px" }}>
+            <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? ""}>
                 {currentPosition ?
                     <Map
                         defaultCenter={currentPosition}
                         defaultZoom={isDesktop ? 15 : 13}
-                        mapId={"8d26521b58a10775"}
+                        mapId={process.env.NEXT_PUBLIC_GOOGLE_MAPS_ID as string}
                         disableDefaultUI={true}
                         backgroundColor={"none"}
                         onTilesLoaded={(event) => {
                             setTitlesLoaded(true);
+                        }}
+                        style={{
+                            borderRadius: 5
                         }}
                     >
                         <Locations

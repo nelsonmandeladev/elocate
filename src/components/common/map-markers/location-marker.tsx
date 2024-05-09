@@ -7,6 +7,8 @@ import { LocationType } from '@/types/app.type';
 import Image from 'next/image';
 import { truncateText } from '@/lib';
 import { useTranslation } from 'react-i18next';
+import { useRouter } from 'next/navigation';
+import { useMapLocationInteractions } from '@/store';
 interface LocationMarkerProps {
     location: LocationType,
 }
@@ -15,6 +17,8 @@ interface LocationMarkerProps {
 export function LocationMarker(props: LocationMarkerProps) {
     const { location } = props;
     const { t } = useTranslation();
+    const router = useRouter();
+    const { currentPosition } = useMapLocationInteractions();
     return (
         <Popover>
             <PopoverTrigger asChild>
@@ -40,7 +44,10 @@ export function LocationMarker(props: LocationMarkerProps) {
                     </div>
                     <div className="flex flex-col gap-2">
                         <h4 className="text-lg font-semibold text-gray-600 flex justify-start items-start gap-3">
-                            <MapPinned size={50} className='text-primary' />
+
+                            <div className="min-W-[10%]">
+                                <MapPinned size={30} className='text-primary' />
+                            </div>
                             {location.formatted_address}
                         </h4>
                         <p className="text-[16px] text-gray-600">
@@ -48,7 +55,12 @@ export function LocationMarker(props: LocationMarkerProps) {
                         </p>
                     </div>
                     <div className="flex gap-2">
-                        <Button size={"sm"} variant={"outline"} className='flex gap-2 text-[16px] font-normal text-gray-600'>
+                        <Button
+                            size={"sm"} variant={"outline"} className='flex gap-2 text-[16px] font-normal text-gray-600'
+                            onClick={() => {
+                                router.push(`https://www.google.com/maps/dir/${currentPosition?.lat},${currentPosition?.lng}/${location.lat},${location.lng}`);
+                            }}
+                        >
                             <ArrowRightLeft />
                             {t("common:key_get_direction")}
                         </Button>

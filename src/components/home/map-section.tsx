@@ -78,7 +78,7 @@ export function MapSection({ session }: MapSectionProps) {
                         </DrawerFooter>
                     </DrawerContent>
                 </Drawer>
-                <div className="h-full w-full relative">
+                <div className="h-full w-full relative rounded">
                     <LocationsMapLoader />
                 </div>
             </div>
