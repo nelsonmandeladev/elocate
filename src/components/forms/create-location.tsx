@@ -14,13 +14,13 @@ import {
     ScrollArea,
     Textarea
 } from '../ui'
-import { ArrowRight, Map, MapPin } from 'lucide-react'
+import { ArrowRight, LocateFixed, MapPinned } from 'lucide-react'
 import { useTranslation } from 'react-i18next';
 import {
     useMapLocationInteractions,
     useMapManagementHomeStore
 } from '@/store';
-import { useLocations, useMediaQuery } from '@/hooks';
+import { useMediaQuery, useReverseCoding } from '@/hooks';
 import { cn } from '@/lib';
 import { CreateLocationType, StorageType } from '@/types/app.type';
 import { useForm } from 'react-hook-form';
@@ -33,12 +33,17 @@ import { toast } from 'sonner';
 
 export default function CreateLocationForm() {
     const { t } = useTranslation();
-    const { reverseCodingResults, selectedPlace, setSelectedPlace } = useMapLocationInteractions();
+    const {
+        reverseCodingResults,
+        selectedPlace,
+        setSelectedPlace,
+        currentPosition,
+        loadingReverseCoding
+    } = useMapLocationInteractions();
     const isDesktop = useMediaQuery("(min-width: 768px)");
     const { setShowFeaturePanel } = useMapManagementHomeStore();
     const [selectedPlaceImage, setSelectedPlaceImage] = useState<StorageType | null>(null);
-
-
+    const { handelReversCoding } = useReverseCoding();
 
     return (
         <div className='w-full'>
@@ -91,8 +96,13 @@ export default function CreateLocationForm() {
                     </div>
                     <ScrollArea className="h-[400px] md:h-auto w-full rounded-md mt-3 md:mt-6 py-0">
                         <div className="flex flex-col gap-4 md:gap-8">
-                            <div className="p-5 bg-white md:bg-gray-100 rounded flex flex-col justify-start items-start gap-3 md:gap-6 ">
-                                <MapPin
+                            <div
+                                className="p-5 bg-white md:bg-gray-100 md:cursor-pointer rounded flex flex-col justify-start items-start gap-3 md:gap-6"
+                                onClick={() => {
+                                    !loadingReverseCoding && handelReversCoding(currentPosition as google.maps.LatLngLiteral)
+                                }}
+                            >
+                                <LocateFixed
                                     size={isDesktop ? 50 : 30}
                                     className='text-primary'
                                 />
@@ -104,16 +114,22 @@ export default function CreateLocationForm() {
                                         {t("common:create_location_current_location_content")}
                                     </p>
                                     <Button
+                                        disabled={loadingReverseCoding}
                                         variant={"outline"}
                                         size={"sm"}
                                         className='flex md:hidden gap-3 justify-start items-center mt-3 text-sm text-gray-600'
+                                        onClick={(event) => {
+                                            event.stopPropagation();
+                                            event.preventDefault();
+                                            handelReversCoding(currentPosition as google.maps.LatLngLiteral)
+                                        }}
                                     >
                                         {t("register_success:get_started_btn")} <ArrowRight size={20} />
                                     </Button>
                                 </div>
                             </div>
                             <div className="p-5 bg-white md:bg-gray-100 rounded flex flex-col justify-start items-start gap-3 md:gap-6">
-                                <Map
+                                <MapPinned
                                     size={isDesktop ? 50 : 30}
                                     className='text-primary'
                                 />
@@ -154,7 +170,6 @@ function FormElement({ selectedPlace, placeImage }: FormElementProps) {
     const [isPending, startTransition] = useTransition();
     const { setSelectedPlace } = useMapLocationInteractions();
     const { setShowFeaturePanel } = useMapManagementHomeStore();
-    const { listAllLocations } = useLocations();
     const form = useForm<CreateLocationFormType>({
 
         resolver: zodResolver(createLocationSchema),

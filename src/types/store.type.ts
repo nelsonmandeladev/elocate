@@ -23,4 +23,7 @@ export type MapLocationInteractionsType = {
 
     maxDistance: number;
     setMaxDistance: (distance: number) => void;
+
+    currentPosition: google.maps.LatLngLiteral | null,
+    setCurrentPosition: (position: google.maps.LatLngLiteral | null) => void;
 }

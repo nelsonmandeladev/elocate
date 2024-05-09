@@ -13,7 +13,7 @@ export default async function page({ params: { locale } }: PageProps) {
     const session = await auth();
     return (
         <main
-            className='h-[calc(100dvh-100px)]'
+            className='h-[calc(100dvh-100px)] rounded'
         >
             <MapSection
                 session={session}
