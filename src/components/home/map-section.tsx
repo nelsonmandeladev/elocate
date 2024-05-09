@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect } from 'react'
-import { LocationsMap, Show } from '../common'
-import { useMapLocationInteractions, useMapManagementHomeStore } from '@/store';
+import React from 'react'
+import { LocationsMapLoader, Show } from '../common'
+import { useMapManagementHomeStore } from '@/store';
 import { Session } from 'next-auth';
 import { cn } from '@/lib';
 import {
@@ -10,7 +10,6 @@ import {
     AlertDescription,
     Button,
     Drawer,
-    DrawerClose,
     DrawerContent,
     DrawerFooter,
     DrawerHeader,
@@ -29,7 +28,10 @@ interface MapSectionProps {
     session: Session | null
 }
 export function MapSection({ session }: MapSectionProps) {
-    const { showFeaturesPanel, setShowFeaturePanel } = useMapManagementHomeStore();
+    const {
+        showFeaturesPanel,
+        setShowFeaturePanel
+    } = useMapManagementHomeStore();
     const { t } = useTranslation();
     const isDesktop = useMediaQuery("(min-width: 768px)");
 
@@ -77,7 +79,7 @@ export function MapSection({ session }: MapSectionProps) {
                     </DrawerContent>
                 </Drawer>
                 <div className="h-full w-full relative">
-                    <LocationsMap />
+                    <LocationsMapLoader />
                 </div>
             </div>
         )
@@ -126,7 +128,7 @@ export function MapSection({ session }: MapSectionProps) {
                 </div>
             </div>
             <div className="h-full w-full relative">
-                <LocationsMap />
+                <LocationsMapLoader />
             </div>
         </div>
     )

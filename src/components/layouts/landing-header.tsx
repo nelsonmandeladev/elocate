@@ -42,8 +42,8 @@ export function LandingPageHeader({ session }: LandingPageHeaderProps) {
     }
     return (
         <div className='w-full py-5 px-2.5 md:px-10 shadow-sm flex justify-between items-center bg-white'>
-            <div className="font-bold text-xl uppercase">
-                ELOCATE {showFeaturesPanel}
+            <div className="font-bold text-2xl uppercase flex items-center gap-0">
+                EL<MapPin className='text-primary' />CATE
             </div>
             <div className=""></div>
             <div className="flex items-center justify-center gap-2">
