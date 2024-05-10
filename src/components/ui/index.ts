@@ -16,3 +16,4 @@ export * from "./textarea";
 export * from "./sonner";
 export * from "./popover";
 export * from "./slider";
+export * from "./sheet";

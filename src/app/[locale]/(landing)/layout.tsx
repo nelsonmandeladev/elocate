@@ -13,7 +13,7 @@ export default async function layout({ children }: LayoutProps) {
                 session={session}
             />
             {children}
-            <LandingPageFooter />
+            {/* <LandingPageFooter /> */}
         </div>
     )
 }

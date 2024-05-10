@@ -9,6 +9,7 @@ import { truncateText } from '@/lib';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'next/navigation';
 import { useMapLocationInteractions } from '@/store';
+import Link from 'next/link';
 interface LocationMarkerProps {
     location: LocationType,
 }
@@ -66,9 +67,13 @@ export function LocationMarker(props: LocationMarkerProps) {
                             <ArrowRightLeft />
                             {t("common:key_get_direction")}
                         </Button>
-                        <Button size={"icon"}>
-                            <Eye />
-                        </Button>
+                        <Link
+                            href={`/locations/${location.id}`}
+                        >
+                            <Button size={"icon"}>
+                                <Eye />
+                            </Button>
+                        </Link>
                     </div>
                 </div>
             </PopoverContent>
