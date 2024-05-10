@@ -16,7 +16,7 @@ interface TranslationProviderProps {
 export function TranslationProvider({ children, locale, resources }: TranslationProviderProps) {
     const i18n = createInstance();
     initTranslations(locale, TRANSlATIONS_NAMESPACES, i18n, resources);
-    const { setCurrentPosition, } = useMapLocationInteractions()
+    const { setCurrentPosition, } = useMapLocationInteractions();
 
     const handleSetCurrentPosition = useCallback(() => {
         navigator.geolocation.getCurrentPosition((position) => {
