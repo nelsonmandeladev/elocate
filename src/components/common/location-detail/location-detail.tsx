@@ -10,6 +10,7 @@ import { fr, enUS } from "date-fns/locale";
 import { Button } from '@/components/ui';
 import Link from 'next/link';
 import { useMapLocationInteractions } from '@/store';
+import { SocialShareButtons } from '../share-buttons';
 
 
 interface LocationDetailsProps {
@@ -62,6 +63,12 @@ export function LocationDetails(props: LocationDetailsProps) {
                         </p>
                     </div>
                 </div>
+                <div className="flex justify-between items-center gap-4 mt-6 md:mt-10 px-5">
+                    <h4 className="text-lg text-gray-700 font-medium">
+                        Share
+                    </h4>
+                    <SocialShareButtons />
+                </div>
             </div>
             <div className="flex justify-between items-center gap-4 mt-6 md:mt-10">
                 <h4 className="text-lg text-gray-700 font-medium">
@@ -80,7 +87,6 @@ export function LocationDetails(props: LocationDetailsProps) {
                         {t("common:key_get_direction")}
                     </Button>
                 </Link>
-
             </div>
         </div>
     )
