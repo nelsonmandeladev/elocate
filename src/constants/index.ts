@@ -1,3 +1,3 @@
 export * from "./translations-namespaces";
-export * from "./api-base-url";
+export * from "./base-urls";
 export * from "./returnable-fields";
