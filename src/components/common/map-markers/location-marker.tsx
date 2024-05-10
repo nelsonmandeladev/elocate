@@ -20,7 +20,9 @@ export function LocationMarker(props: LocationMarkerProps) {
     const router = useRouter();
     const { currentPosition } = useMapLocationInteractions();
     return (
-        <Popover>
+        <Popover
+
+        >
             <PopoverTrigger asChild>
                 <Button
                     onClick={(event) => {
@@ -31,7 +33,7 @@ export function LocationMarker(props: LocationMarkerProps) {
                     <MapPin className='text-blue-700 cursor-pointer' size={50} />
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-80 h-full rounded p-3" side='top' sideOffset={5}>
+            <PopoverContent className="w-80 h-full rounded p-3" side='top' sideOffset={5} >
                 <div className="flex flex-col gap-3 w-full">
                     <div className="aspect-auto rounded relative cursor-pointer h-[150px] md:min-h-[180px] md:max-h-[180px] bg-gray-100">
                         <Image

@@ -168,7 +168,7 @@ interface FormElementProps {
 function FormElement({ selectedPlace, placeImage }: FormElementProps) {
     const { t } = useTranslation();
     const [isPending, startTransition] = useTransition();
-    const { setSelectedPlace } = useMapLocationInteractions();
+    const { setSelectedPlace, addNewLocation, setCurrentPosition } = useMapLocationInteractions();
     const { setShowFeaturePanel } = useMapManagementHomeStore();
     const form = useForm<CreateLocationFormType>({
 
@@ -194,14 +194,22 @@ function FormElement({ selectedPlace, placeImage }: FormElementProps) {
                 method: "POST",
                 body: JSON.stringify(request_data)
             })
-            await response.json();
 
             if (response.status === 201) {
+                const response_data = await response.json();
+                addNewLocation(response_data);
+
                 toast.success(t("common:add_location_success"), { duration: 10000 });
                 setSelectedPlace(null);
                 setShowFeaturePanel(false);
+                navigator.geolocation.getCurrentPosition((position) => {
+                    setCurrentPosition({
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    })
+                })
             } else {
-                toast.error(t("common:add_location_success"), { duration: 10000 })
+                toast.error(t("common:add_location_error"), { duration: 10000 })
             }
         })
     }
