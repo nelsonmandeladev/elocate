@@ -29,5 +29,12 @@ export const useMapLocationInteractions = create<MapLocationInteractionsType>((s
     })),
     setCurrentPosition: (position) => set((state) => ({
         currentPosition: position
-    }))
+    })),
+
+    addNewLocation: (location) => {
+        set((state) => ({
+            ...state,
+            locationsFound: state.locationsFound ? [...state.locationsFound, location] : [location]
+        }))
+    }
 }))
