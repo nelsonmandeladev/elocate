@@ -20,7 +20,7 @@ import {
     useMapLocationInteractions,
     useMapManagementHomeStore
 } from '@/store';
-import { useMediaQuery, useReverseCoding } from '@/hooks';
+import { useLocations, useMediaQuery, useReverseCoding } from '@/hooks';
 import { cn } from '@/lib';
 import { CreateLocationType, StorageType } from '@/types/app.type';
 import { useForm } from 'react-hook-form';
@@ -168,10 +168,10 @@ interface FormElementProps {
 function FormElement({ selectedPlace, placeImage }: FormElementProps) {
     const { t } = useTranslation();
     const [isPending, startTransition] = useTransition();
-    const { setSelectedPlace, addNewLocation, setCurrentPosition } = useMapLocationInteractions();
+    const { setSelectedPlace, setCurrentPosition, currentPosition, maxDistance } = useMapLocationInteractions();
     const { setShowFeaturePanel } = useMapManagementHomeStore();
+    const { listAllLocations } = useLocations()
     const form = useForm<CreateLocationFormType>({
-
         resolver: zodResolver(createLocationSchema),
         defaultValues: {
             formatted_address: selectedPlace?.formatted_address,
@@ -196,18 +196,10 @@ function FormElement({ selectedPlace, placeImage }: FormElementProps) {
             })
 
             if (response.status === 201) {
-                const response_data = await response.json();
-                addNewLocation(response_data);
-
+                listAllLocations(currentPosition as google.maps.LatLngLiteral, maxDistance);
                 toast.success(t("common:add_location_success"), { duration: 10000 });
                 setSelectedPlace(null);
                 setShowFeaturePanel(false);
-                navigator.geolocation.getCurrentPosition((position) => {
-                    setCurrentPosition({
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    })
-                })
             } else {
                 toast.error(t("common:add_location_error"), { duration: 10000 })
             }
