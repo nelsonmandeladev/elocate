@@ -24,6 +24,7 @@ import { Session } from 'next-auth';
 import { signOut } from "next-auth/react"
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 
 interface LandingPageHeaderProps {
@@ -34,6 +35,7 @@ interface LandingPageHeaderProps {
 export function LandingPageHeader({ session }: LandingPageHeaderProps) {
     const { t } = useTranslation();
     const { setShowFeaturePanel, showFeaturesPanel } = useMapManagementHomeStore();
+    const router = useRouter();
 
     async function handleLogOut() {
         await signOut({
@@ -55,7 +57,8 @@ export function LandingPageHeader({ session }: LandingPageHeaderProps) {
                     className='hidden md:flex'
                     disabled={showFeaturesPanel}
                     onClick={() => {
-                        setShowFeaturePanel(true)
+                        router.push("/");
+                        setShowFeaturePanel(true);
                     }}
                 >
                     <MapPin className='mr-2' />
@@ -66,7 +69,8 @@ export function LandingPageHeader({ session }: LandingPageHeaderProps) {
                     className='flex md:hidden'
                     disabled={showFeaturesPanel}
                     onClick={() => {
-                        setShowFeaturePanel(true)
+                        router.push("/");
+                        setShowFeaturePanel(true);
                     }}
                 >
                     <Plus />
