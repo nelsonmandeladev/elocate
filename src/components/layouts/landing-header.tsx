@@ -23,6 +23,7 @@ import { useMapManagementHomeStore } from '@/store';
 import { Session } from 'next-auth';
 import { signOut } from "next-auth/react"
 import Image from 'next/image';
+import Link from 'next/link';
 
 
 interface LandingPageHeaderProps {
@@ -42,9 +43,12 @@ export function LandingPageHeader({ session }: LandingPageHeaderProps) {
     }
     return (
         <div className='w-full py-5 px-2.5 md:px-10 shadow-sm flex justify-between items-center bg-white'>
-            <div className="font-bold text-2xl uppercase flex items-center gap-0">
+            <Link
+                className="font-bold text-2xl uppercase flex items-center gap-0"
+                href={"/"}
+            >
                 EL<MapPin className='text-primary' />CATE
-            </div>
+            </Link>
             <div className=""></div>
             <div className="flex items-center justify-center gap-2">
                 <Button

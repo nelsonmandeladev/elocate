@@ -57,8 +57,35 @@ export async function listAllLocation(lat: number, lng: number, radiusInKm: numb
             image: {
                 select: STORAGE_RETURNABLE_FIELDS
             }
+        },
+        orderBy: {
+            createdAt: "desc"
         }
     });
 
     return locations;
+}
+
+
+export async function findOneLocation(id: string) {
+    try {
+        const location = await prisma.location.findUnique({
+            where: {
+                id: id
+            },
+            select: {
+                ...LOCATION_RETURNABLE_FIELD,
+                user: {
+                    select: USER_RETURNABLE_FIELD
+                },
+                image: {
+                    select: STORAGE_RETURNABLE_FIELDS
+                }
+            }
+        });
+
+        return location
+    } catch (error) {
+        return null
+    }
 }

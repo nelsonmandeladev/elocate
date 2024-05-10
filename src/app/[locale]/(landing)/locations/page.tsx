@@ -1,0 +1,10 @@
+import React from 'react'
+
+export default async function page() {
+
+    return (
+        <div>
+            List Location Page
+        </div>
+    )
+}
