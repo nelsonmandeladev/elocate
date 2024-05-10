@@ -55,7 +55,7 @@ export function LocationDetails(props: LocationDetailsProps) {
                             })}
                         </p>
                     </div>
-                    <div className="flex justify-start items-center border border-gray-100 px-5 py-2.5 rounded-full gap-3 text-gray-600 font-normal">
+                    <div className="flex justify-start items-center border border-primary px-5 py-2.5 rounded-full gap-3 text-primary font-normal">
                         <UserRound />
                         <p className="">
                             {location.user.name}
