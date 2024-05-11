@@ -9,6 +9,7 @@ export const useMapLocationInteractions = create<MapLocationInteractionsType>((s
     maxDistance: 5,
     loadingLocations: false,
     currentPosition: null,
+    selectedLocation: null,
     setReverseCodingResults: (results) => set((state) => ({
         reverseCodingResults: results
     })),
@@ -36,5 +37,8 @@ export const useMapLocationInteractions = create<MapLocationInteractionsType>((s
             ...state,
             locationsFound: state.locationsFound ? [...state.locationsFound, location] : [location]
         }))
-    }
+    },
+    setSelectedLocation: (location) => set((state) => ({
+        selectedLocation: location
+    }))
 }))
