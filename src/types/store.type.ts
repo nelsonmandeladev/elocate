@@ -28,4 +28,7 @@ export type MapLocationInteractionsType = {
     setCurrentPosition: (position: google.maps.LatLngLiteral | null) => void;
 
     addNewLocation: (location: LocationType) => void;
+
+    selectedLocation: LocationType | null;
+    setSelectedLocation: (location: LocationType | null) => void;
 }

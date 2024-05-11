@@ -25,7 +25,7 @@ export function LocationDetails(props: LocationDetailsProps) {
     return (
         <div className="">
             <div className='bg-white shadow-ms rounded w-full flex flex-col gap-4 pb-5'>
-                <div className="aspect-auto rounded relative h-[300px] md:min-h-[350px] md:max-h-[350px] bg-gray-100">
+                <div className="aspect-auto rounded relative h-[300px] md:min-h-[350px] md:max-h-[350px] bg-gray-200">
                     <Image
                         src={location.image.url}
                         alt={location.image.pathname}

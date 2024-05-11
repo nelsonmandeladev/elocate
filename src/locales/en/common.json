@@ -36,5 +36,7 @@
     "save_location_btn": "Save location",
     "add_location_success": "You added successfully a new location 🎊",
     "add_location_failed": "A problem occurred while adding the location 😔, try again later 💪🏿",
-    "key_get_direction": "Get the direction"
+    "key_get_direction": "Get the direction",
+    "key_story": "Success story",
+    "key_locations": "Locations"
 }

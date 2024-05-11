@@ -32,8 +32,8 @@ export function LocationsMapLoader() {
     const [titlesLoaded, setTitlesLoaded] = useState(false);
     const isDesktop = useMediaQuery("(min-width: 768px)");
     useEffect(() => {
-        currentPosition && listAllLocations(currentPosition as google.maps.LatLngLiteral, maxDistance);
-    }, [listAllLocations, currentPosition, maxDistance]);
+        (currentPosition && locationsFound.length === 0) && listAllLocations(currentPosition as google.maps.LatLngLiteral, maxDistance);
+    }, [listAllLocations, currentPosition, maxDistance, locationsFound]);
 
 
     return (

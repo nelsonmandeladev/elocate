@@ -12,6 +12,7 @@ import {
 } from '../ui'
 import { useTranslation } from 'react-i18next';
 import {
+    EachRenderer,
     LanguageSwitcher,
     Show
 } from '../common';
@@ -24,11 +25,13 @@ import { Session } from 'next-auth';
 import { signOut } from "next-auth/react"
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { cn } from '@/lib';
+import { NAV_LINKS } from '@/data';
 
 
 interface LandingPageHeaderProps {
-    session: Session | null
+    session: Session | null;
 }
 
 
@@ -36,6 +39,7 @@ export function LandingPageHeader({ session }: LandingPageHeaderProps) {
     const { t } = useTranslation();
     const { setShowFeaturePanel, showFeaturesPanel } = useMapManagementHomeStore();
     const router = useRouter();
+    const pathname = usePathname();
 
     async function handleLogOut() {
         await signOut({
@@ -43,6 +47,11 @@ export function LandingPageHeader({ session }: LandingPageHeaderProps) {
             callbackUrl: "/"
         });
     }
+
+    function removeText(str: string, textToRemove: string): string {
+        return str.replace(textToRemove, '');
+    }
+
     return (
         <div className='w-full py-5 px-2.5 md:px-10 shadow-sm flex justify-between items-center bg-white'>
             <Link
@@ -51,7 +60,21 @@ export function LandingPageHeader({ session }: LandingPageHeaderProps) {
             >
                 EL<MapPin className='text-primary' />CATE
             </Link>
-            <div className=""></div>
+            <ul className="hidden md:flex justify-center items-center gap-3">
+                <EachRenderer
+                    of={NAV_LINKS}
+                    render={(item) => (
+                        <li className="">
+                            <Link
+                                href={item.href}
+                                className={cn("rounded py-4 px-8 font-semibold hover:bg-primary/10 hover:text-primary transition-all duration-300", item.href === removeText(pathname, "/fr") ? "text-primary bg-primary/10" : "bg-gray-100 text-gray-600")}
+                            >
+                                {t(item.text)}
+                            </Link>
+                        </li>
+                    )}
+                />
+            </ul>
             <div className="flex items-center justify-center gap-2">
                 <Button
                     className='hidden md:flex'

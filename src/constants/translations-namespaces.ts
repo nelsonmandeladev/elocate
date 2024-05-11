@@ -2,5 +2,6 @@ export const TRANSlATIONS_NAMESPACES: string[] = [
     'home',
     'common',
     "not_found",
-    'register_success'
+    'register_success',
+    "error"
 ]
