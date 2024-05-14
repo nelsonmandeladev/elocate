@@ -38,5 +38,13 @@
     "add_location_failed": "A problem occurred while adding the location 😔, try again later 💪🏿",
     "key_get_direction": "Get the direction",
     "key_story": "Success story",
-    "key_locations": "Locations"
+    "key_locations": "Locations",
+    "stay_tunned_drawer_header": "Make sure to stay stunned",
+    "stay_tunned_drawer_description": " Never miss something about the latest features and the entire evolution of this plate-form",
+    "key_stay_tunned_email_label": "We need you email",
+    "key_stay_tunned_message_label": "We accept a shore message",
+    "stay_tunned": "Stay tunned",
+    "key_email_required": "Email required",
+    "add_stay_tunned_success": "Perfect 😎, you will be notified directly of any changes 🎊",
+    "add_stay_tunned_error": "Oh noooon 😞, we couldn't complete this action. Please try again later 🦾"
 }

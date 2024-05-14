@@ -32,3 +32,8 @@ export type MapLocationInteractionsType = {
     selectedLocation: LocationType | null;
     setSelectedLocation: (location: LocationType | null) => void;
 }
+
+export type DrawerStoreType = {
+    isDrawerOpen: boolean;
+    setIsDrawerOpen: () => void;
+}

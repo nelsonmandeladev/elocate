@@ -4,7 +4,7 @@ export const NAV_LINKS = [
         text: "common:key_locations"
     },
     {
-        href: "/success-story",
+        href: "/stories",
         text: "common:key_story"
     },
 

@@ -15,6 +15,7 @@ import {
     Spinner
 } from '../ui';
 import { useTranslation } from 'react-i18next';
+import { cn } from '@/lib';
 
 interface LocationsListProps {
     session: Session | null,

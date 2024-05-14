@@ -168,7 +168,7 @@ interface FormElementProps {
 function FormElement({ selectedPlace, placeImage }: FormElementProps) {
     const { t } = useTranslation();
     const [isPending, startTransition] = useTransition();
-    const { setSelectedPlace, setCurrentPosition, currentPosition, maxDistance } = useMapLocationInteractions();
+    const { setSelectedPlace, currentPosition, maxDistance } = useMapLocationInteractions();
     const { setShowFeaturePanel } = useMapManagementHomeStore();
     const { listAllLocations } = useLocations()
     const form = useForm<CreateLocationFormType>({
@@ -219,7 +219,6 @@ function FormElement({ selectedPlace, placeImage }: FormElementProps) {
                             </FormLabel>
                             <FormControl>
                                 <Input
-                                    placeholder='helolo'
                                     className="bg-gray-100 py-6"
                                     {...field}
                                 />
@@ -238,7 +237,6 @@ function FormElement({ selectedPlace, placeImage }: FormElementProps) {
                             </FormLabel>
                             <FormControl>
                                 <Textarea
-                                    placeholder="Tell us a little bit about yourself"
                                     className="resize-none bg-gray-100"
                                     {...field}
                                 />
