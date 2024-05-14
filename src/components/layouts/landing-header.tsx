@@ -20,7 +20,7 @@ import {
     MapPin,
     Plus
 } from 'lucide-react';
-import { useMapManagementHomeStore } from '@/store';
+import { useDrawerStore, useMapManagementHomeStore } from '@/store';
 import { Session } from 'next-auth';
 import { signOut } from "next-auth/react"
 import Image from 'next/image';
@@ -28,6 +28,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib';
 import { NAV_LINKS } from '@/data';
+import { ContactSupportForm } from '../forms';
 
 
 interface LandingPageHeaderProps {
@@ -40,6 +41,7 @@ export function LandingPageHeader({ session }: LandingPageHeaderProps) {
     const { setShowFeaturePanel, showFeaturesPanel } = useMapManagementHomeStore();
     const router = useRouter();
     const pathname = usePathname();
+    const { setIsDrawerOpen } = useDrawerStore();
 
     async function handleLogOut() {
         await signOut({
@@ -122,13 +124,20 @@ export function LandingPageHeader({ session }: LandingPageHeaderProps) {
                                 <DropdownMenuContent align="end" className='w-52'>
                                     <DropdownMenuLabel>My Account</DropdownMenuLabel>
                                     <DropdownMenuSeparator />
-                                    <DropdownMenuItem className='text-[16px] text-gray-500 font-medium'>Settings</DropdownMenuItem>
-                                    <DropdownMenuItem className='text-[16px] text-gray-500 font-medium'>Support</DropdownMenuItem>
+                                    <Link
+                                        href={"/settings"}
+                                    >
+                                        <DropdownMenuItem className='text-[16px] text-gray-500 font-medium cursor-pointer'>
+                                            Settings
+                                        </DropdownMenuItem>
+                                    </Link>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem
                                         className='hover:bg-red-300'
                                         onClick={handleLogOut}
-                                    >Logout</DropdownMenuItem>
+                                    >
+                                        Logout
+                                    </DropdownMenuItem>
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         </Show.When>

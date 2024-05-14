@@ -26,3 +26,13 @@ export const stayConnectSchema = object({
 })
 
 export type StayConnectFormType = z.infer<typeof stayConnectSchema>;
+
+export const contactSupportSchema = object({
+    email: string({ required_error: "key_email_required" })
+        .min(1, "key_email_required")
+        .email("Invalid email"),
+    message: string({ required_error: "key_required_field" })
+        .min(1, "key_required_field")
+})
+
+export type ContactSupportFormType = z.infer<typeof contactSupportSchema>;

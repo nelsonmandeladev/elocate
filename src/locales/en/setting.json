@@ -1,0 +1,18 @@
+{
+    "settings_header": "Settings",
+    "general_label": "General",
+    "email_label": "Email",
+    "email_description": "Mainly to identify you within our entire system.",
+    "name_label": "Your name",
+    "name_description": "This is the name shown to the users whenever they open the location detail created by you.",
+    "languages_label": "Languages and Others",
+    "languages_description": "Change the language of content displayed here to meet your needs and find other information related to your account.",
+    "contact_support_title": "Contact support",
+    "contact_support_description": "Having trouble using this app ?, do you thing we mess up something or that we could do it more better ? or just want to give a support (new line of code, a coffee...) ? ",
+    "contact_support_label": "Drop us a line",
+    "contact_support_placeholder": "Your object goes here",
+    "contact_support_message_placeholder": "Your message goes here ?",
+    "contact_support_message": "Have more that a line ?",
+    "contact_support_btn": "Send a message",
+    "add_contact_support_success": "Perfect 😎, Your message has been delivered. Now let us just go through it and get back to u ASAP 🎊"
+}

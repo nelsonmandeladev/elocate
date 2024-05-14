@@ -80,7 +80,6 @@ export function StayConnectForm(props: StayConnectFormProps) {
                                 </FormLabel>
                                 <FormControl>
                                     <Input
-                                        placeholder='helolo'
                                         className="bg-gray-100 py-6"
                                         {...field}
                                     />
@@ -99,7 +98,6 @@ export function StayConnectForm(props: StayConnectFormProps) {
                                 </FormLabel>
                                 <FormControl>
                                     <Textarea
-                                        placeholder="Tell us a little bit about yourself"
                                         className="resize-none bg-gray-100"
                                         {...field}
                                     />
