@@ -16,9 +16,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 
 export const metadata: Metadata = {
-    title: "Localiser elecam facilement | ELEPOINTS",
-    description: "Cette application aide toute personne desireuse de faire une carte d'electeur au cameroun et partout ailleur de trouver un point d'enrolement pres de lui et obtenir le trajet le plus rapide pour s'y rendre",
+    title: "Easily Locate | ELOCATE",
+    description: "This application helps anyone looking to get a voter card in Cameroon or anywhere else find a nearby enrollment point and obtain the fastest route to get there.",
 };
+
 
 interface LayoutProps {
     children: ReactNode,
