@@ -1,8 +1,8 @@
 import { object, string, z, number } from "zod"
 
 export const signInSchema = object({
-    email: string({ required_error: "Email is required" })
-        .min(1, "Email is required")
+    email: string({ required_error: "key_email_required" })
+        .min(1, "key_email_required")
         .email("Invalid email")
 });
 export type SingFormType = z.infer<typeof signInSchema>;
@@ -16,3 +16,13 @@ export const createLocationSchema = object({
 });
 
 export type CreateLocationFormType = z.infer<typeof createLocationSchema>;
+
+export const stayConnectSchema = object({
+    email: string({ required_error: "key_email_required" })
+        .min(1, "key_email_required")
+        .email("Invalid email"),
+    message: string()
+        .min(0)
+})
+
+export type StayConnectFormType = z.infer<typeof stayConnectSchema>;

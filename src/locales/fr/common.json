@@ -38,5 +38,13 @@
     "add_location_failed": "Un problème est survenu lors de l'ajout de l'emplacement 😔, réessayez plus tard 💪🏿",
     "key_get_direction": "Obtenir la direction",
     "key_story": "Expériences",
-    "key_locations": "Localistions"
+    "key_locations": "Localistions",
+    "stay_tunned_drawer_header": "Assurez-vous de rester à l'écoute",
+    "stay_tunned_drawer_description": "Ne manquez jamais les dernières fonctionnalités et l'évolution de cette plateforme",
+    "key_stay_tunned_email_label": "Nous avons besoin de votre email",
+    "key_stay_tunned_message_label": "Nous acceptons un court message",
+    "stay_tunned": "Restez à l'écoute",
+    "key_email_required": "Email requis",
+    "add_stay_tunned_success": "Parfait 😎, au moindre chagement vous serez directement informé 🎊",
+    "add_stay_tunned_error": "Oh noooon 😞, nous n'avons pas pu terminer cette action. essayer plutard pour voir 🦾"
 }
