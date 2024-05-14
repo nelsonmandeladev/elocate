@@ -4,5 +4,6 @@ export const TRANSlATIONS_NAMESPACES: string[] = [
     "not_found",
     'register_success',
     "error",
-    "coming-soon"
+    "coming-soon",
+    "setting"
 ]

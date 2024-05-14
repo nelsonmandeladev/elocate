@@ -1,0 +1,18 @@
+{
+    "settings_header": "Paramètres",
+    "general_label": "Général",
+    "email_label": "Email",
+    "email_description": "Principalement pour vous identifier dans l'ensemble de notre système.",
+    "name_label": "Votre nom",
+    "name_description": "C'est le nom affiché aux utilisateurs lorsqu'ils ouvrent le détail de l'emplacement créé par vous.",
+    "languages_label": "Langues et autres",
+    "languages_description": "Changez la langue du contenu affiché ici pour répondre à vos besoins et trouvez d'autres informations liées à votre compte.",
+    "contact_support_title": "Contacter le support",
+    "contact_support_description": "Avez-vous des difficultés à utiliser cette application ? Pensez-vous que nous avons fait une erreur ou que nous pourrions faire mieux ? Ou voulez-vous simplement apporter votre soutien (une nouvelle ligne de code, un café...) ?",
+    "contact_support_label": "Envoyez-nous un message",
+    "contact_support_placeholder": "Votre objet ici",
+    "contact_support_message_placeholder": "Votre message ici",
+    "contact_support_message": "Vous avez plus qu'une ligne ?",
+    "contact_support_btn": "Envoyer un message",
+    "add_contact_support_success": "Parfait 😎, Votre message a été envoyé avec success. Nous passons en revue et revenons vers vous dès que possible 🎊"
+}
