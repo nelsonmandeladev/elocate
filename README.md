@@ -1,6 +1,6 @@
 # ELOCATE
 
-Place Finder is an open-source project designed to help people find and share places easily. It features an interactive map, location details, and user-generated content, providing a comprehensive platform for discovering new locations around you.
+ELOCATE is an open-source project designed to help people find and share places easily. It features an interactive map, location details, and user-generated content, providing a comprehensive platform for discovering new locations around you.
 
 ## Table of Contents
 
