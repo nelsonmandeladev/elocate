@@ -10,9 +10,11 @@ type SliderProps = React.ComponentProps<typeof Slider>
 export function ExpandLocationsListZone({ className, ...props }: SliderProps) {
     const { maxDistance, setMaxDistance, locationsFound } = useMapLocationInteractions();
     return (
-        <div className="bg-white rounded border border-primary w-full md:w-96 shadow-sm p-5">
-            <h4 className="mb-4 text-gray-500 m-0">
-                Distance max: <span className="text-primary text-lg font-bold">{maxDistance} KM</span>
+        <div className={cn("bg-white rounded border border-primary w-full md:w-96 shadow-sm p-5")}>
+
+            <h4 className="mb-4 text-gray-500 m-0 flex justify-between items-center">
+                <span>Showing: <span className="text-primary font-bold">{locationsFound.length} locations </span></span>
+                <span>Within: <span className="text-primary font-bold">{maxDistance} KM</span></span>
             </h4>
             <Slider
                 onValueCommit={(value) => {
@@ -26,11 +28,6 @@ export function ExpandLocationsListZone({ className, ...props }: SliderProps) {
                 className={cn("w-full", className)}
                 {...props}
             />
-            <div className="w-full flex justify-end mt-4">
-                <h4 className="text-gray-500 m-0">
-                    Showing: <span className="text-primary text-lg font-bold">{locationsFound.length} locations </span>
-                </h4>
-            </div>
         </div>
     )
 }

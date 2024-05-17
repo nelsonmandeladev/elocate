@@ -18,6 +18,17 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
     title: "Easily Locate | ELOCATE",
     description: "This application helps anyone looking to get a voter card in Cameroon or anywhere else find a nearby enrollment point and obtain the fastest route to get there.",
+    metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_SITE_URL ?? ""),
+    alternates: {
+        canonical: '/',
+        languages: {
+            'en-US': '/en',
+            'fr-FR': '/fr',
+        },
+    },
+    openGraph: {
+        images: '/src/app/[locale]/opengraph-image.png',
+    },
 };
 
 

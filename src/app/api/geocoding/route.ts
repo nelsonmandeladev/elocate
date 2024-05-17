@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     if (request.headers.get("referer")?.includes("/fr")) {
         language = "fr"
     }
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${body.lat},${body.lng}&language=${language}&key=${process.env.GOOGLE_MAPS_API_KEY}`
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${body.lat},${body.lng}&language=${language}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}`
 
     try {
         const response = await fetch(url, {
